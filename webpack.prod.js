@@ -1,16 +1,16 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const baseManifest = require('./chrome/manifest.prod.json')
+const baseManifest = require('./ext/manifest.prod.json')
 const WebpackExtensionManifestPlugin = require('webpack-extension-manifest-plugin')
 
 const config = {
   mode: 'production',
   entry: {
-    app: path.join(__dirname, './chrome/app.js'),
+    app: path.join(__dirname, './ext/app.js'),
     background: path.join(
       __dirname,
-      './chrome/scripts/background/index.js'
+      './ext/scripts/background/index.js'
     ),
   },
   output: {
@@ -31,12 +31,12 @@ const config = {
       },
       manifest: 'manifest.prod.json',
       filename: 'index.html',
-      template: './chrome/index.html',
+      template: './ext/index.html',
       hash: true,
     }),
     new CopyPlugin([
       {
-        from: 'chrome/icons',
+        from: 'ext/icons',
         to: 'icons',
       },
     ]),
