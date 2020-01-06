@@ -1,0 +1,7 @@
+.vscode
+build
+dev
+node_modules
+*.crx
+*.zip
+*.pem

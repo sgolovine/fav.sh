@@ -1,0 +1,10 @@
+/build/**
+/.cache/**
+/.circleci/**
+/.storybook/**
+/.dist/**
+/node_modules/**
+/static/**
+/bookmarklets.js
+/precache-config.js
+dev-server.js
