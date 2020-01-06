@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development webpack --mode development --config webpack.dev.js --watch",
-    "start:firefox": "web-ext run --source-dir ./build/",
+    "start:firefox": "web-ext run --source-dir ./firefox/ --verbose",
     "build:firefox": "NODE_ENV=development webpack --mode development --config ./webpack/firefox.js --watch",
+    "clean:firefox": "rm -rf ./firefox",
     "build": "yarn clean:prod && NODE_ENV=production webpack --mode production --config webpack.prod.js",
     "prettier": "prettier --config ./.prettierrc --write 'app/**/*.js'",
     "lint": "eslint 'app/**/*.js'",
