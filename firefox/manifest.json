@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "Fav Bookmark Manager",
+  "short_name": "Fav",
+  "version": "0.2.0",
+  "description": "An alternative bookmark manager that sync's with Github Gist",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistence": false
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "identity",
+    "https://*.github.com/*",
+    "https://*.fav.sh/*"
+  ]
+}

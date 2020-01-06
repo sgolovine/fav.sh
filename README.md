@@ -38,6 +38,12 @@ Run `yarn build:prod` to build the extension to the build/ folder
 Open chrome and navigate to `chrome://extensions`. There toggle "Developer Mode" if not already toggled.
 Finally click "Pack extension" and select the `build` folder as the directory and then `buildkey.pem` as the keyfile
 
+## WIP: Running on Firefox
+
+1. `yarn build:firefox` - build from source to /build folder for firefox
+
+2. `yarn start:firefox` - use `web-ext` to launch the extension on firefox
+
 ## Redux Devtools
 
 Because redux devtools extension does not work with chrome extensions, we use a DevTools panel instead to display the redux store.
