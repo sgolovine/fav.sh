@@ -1,4 +1,8 @@
-## Fav Bookmark Manager
+<div align="center">
+  <image src="icon.png" height="256" width="256">
+  <h2>Fav Bookmark Manager</h2>
+  <hr />
+</div>
 
 Open source bookmark manager extension for Chrome. Intergrates with Github Gist.
 
