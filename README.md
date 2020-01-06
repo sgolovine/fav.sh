@@ -8,6 +8,19 @@ Open source bookmark manager extension for Chrome. Intergrates with Github Gist.
 
 [Install from Chrome Web Store](https://chrome.google.com/webstore/detail/fav-bookmark-manager/gammmbkeceiljlgijimbhhgkfmiejnkl)
 
+## Screenshots
+
+<div style="display:flex">
+  <img src="screenshots/add.png">
+  <img src="screenshots/main2.png">
+</div>
+<div style="display:flex">
+  <img src="screenshots/sidebar.png">
+  <img src="screenshots/sync1.png">
+</div>
+
+## Development
+
 ### Building from Source
 
 Node, npm and yarn are all required to run the project.
@@ -26,24 +39,16 @@ Node, npm and yarn are all required to run the project.
 
 ```
    - build
-      yarn clean:prod && NODE_ENV=production webpack --mode production --config webpack.prod.js
    - build:firefox
-      NODE_ENV=development webpack --mode development --config ./webpack/firefox.js --watch
    - clean
-      rm -rf './build'
    - clean:firefox
-      rm -rf ./firefox
    - dev
-      NODE_ENV=development webpack --mode development --config webpack.dev.js --watch
    - lint
-      eslint 'app/**/*.js'
    - prettier
-      prettier --config ./.prettierrc --write 'app/**/*.js'
    - start:firefox
-      web-ext run --source-dir ./firefox/ --verbose
 ```
 
-## Building for Production
+### Building for Production
 
 Run `yarn build:prod` to build the extension to the build/ folder
 
@@ -52,7 +57,7 @@ Run `yarn build:prod` to build the extension to the build/ folder
 Open chrome and navigate to `chrome://extensions`. There toggle "Developer Mode" if not already toggled.
 Finally click "Pack extension" and select the `build` folder as the directory and then `buildkey.pem` as the keyfile
 
-## Firefox
+### Firefox
 
 ```
 
@@ -64,12 +69,12 @@ yarn start:firefox  # Start the development server (using `web-ext`)
 
 The extension should then open on Firefox.
 
-## Redux Devtools
+### Redux Devtools
 
 Because redux devtools extension does not work with chrome extensions, we use a DevTools panel instead to display the redux store.
 It should already be open when you load the app on the right.
 
-### Contributing
+## Contributing
 
 PR's and contributions are welcome.
 
