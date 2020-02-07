@@ -1,8 +1,1 @@
-.vscode
-build
-dev
-node_modules
-firefox
-*.crx
-*.zip
-*.pem
+.DS_Store
