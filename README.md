@@ -9,6 +9,6 @@ This is a rebuild of the original Fav bookmark manager that I created a few year
 
 Installation, Contribution, etc are all WIP
 
-### License
+## License
 
 MIT
