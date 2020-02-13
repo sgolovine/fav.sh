@@ -12,14 +12,18 @@ const AppDevContainer = styled.div`
   height: 500px;
   width: 800px;
   overflow-x: hidden;
+  border: 1px solid;
+  margin: 1em;
 `;
 
 // Place anything "dev" related that should be rendered next
 // to the extension here, (ie. Redux dev tools)
 const WebContainer = () => {
-  <AppDevContainer>
-    <App />
-  </AppDevContainer>;
+  return (
+    <AppDevContainer>
+      <App />
+    </AppDevContainer>
+  );
 };
 
 ReactDOM.render(<WebContainer />, document.getElementById("root"));

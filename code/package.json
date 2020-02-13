@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:ext": "parcel ./src/manifest.json",
-    "start:web": "parcel ./src/index.html",
+    "start:web": "parcel ./src/entry/web.html",
     "start:firefox": "web-ext run --source-dir ./dist",
     "clean": "rm -rf ./dist ./.cache"
   },
