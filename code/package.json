@@ -7,7 +7,7 @@
     "start:ext": "parcel ./src/manifest.json",
     "start:web": "parcel ./src/entry/web.html",
     "start:firefox": "web-ext run --source-dir ./dist",
-    "prettier": "prettier --write '**/*.{ts, tsx, js, jsx, md, json}'",
+    "format": "prettier --write '**/*.{ts, tsx, js, jsx, md, json}'",
     "clean": "rm -rf ./dist ./.cache"
   },
   "author": "Sunny Golovine",
@@ -22,6 +22,7 @@
     "@types/styled-components": "^4.4.3",
     "parcel": "^1.12.4",
     "parcel-plugin-web-extension": "^1.6.1",
+    "prettier": "^1.19.1",
     "typescript": "^3.7.5",
     "web-ext": "^4.1.0",
     "webpack": "^4.41.6",
