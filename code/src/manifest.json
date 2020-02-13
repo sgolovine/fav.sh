@@ -15,6 +15,6 @@
       "32": "icons/32.png"
     },
     "default_title": "Fav",
-    "default_popup": "index.html"
+    "default_popup": "entry/extension.html"
   }
 }

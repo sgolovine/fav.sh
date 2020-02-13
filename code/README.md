@@ -33,3 +33,27 @@ Long story short I have learned quite a bit about how Javascript and Bundling wo
 ### As a web app
 
 Though this app is not meant to run as a web app, if you are not doing something that is extension related, it's often easier to run the app as a web app. To do so just run `start:web` and navigate to `localhost:1234`
+
+## Project Structure
+
+The project is structured with this basic structure
+
+```
+src/
+  styles/
+  js/
+  entry/
+  icons/
+  manifest.json
+
+```
+
+`styles/` - stores the root styles of the extension, all components within the app are styled using `styled-components`
+
+`js/` - stores all Javascript code to the app.
+
+`entry/` - stores all entry points into the app
+
+`icons/` - stores extension icons
+
+`manifest.json` - extension manifest
