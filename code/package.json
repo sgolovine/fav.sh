@@ -4,8 +4,21 @@
   "description": "Fav Bookmark Manager",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:ext": "parcel ./src/manifest.json",
+    "start:web": "parcel ./src/index.html",
+    "clean": "rm -rf ./dist ./.cache"
   },
   "author": "Sunny Golovine",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4",
+    "parcel-plugin-web-extension": "^1.6.1",
+    "web-ext": "^4.1.0",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  }
 }
