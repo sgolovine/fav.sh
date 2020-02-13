@@ -6,13 +6,15 @@
   "scripts": {
     "start:ext": "parcel ./src/manifest.json",
     "start:web": "parcel ./src/index.html",
+    "start:firefox": "web-ext run --source-dir ./dist",
     "clean": "rm -rf ./dist ./.cache"
   },
   "author": "Sunny Golovine",
   "license": "MIT",
   "dependencies": {
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.0.1"
   },
   "devDependencies": {
     "parcel": "^1.12.4",
