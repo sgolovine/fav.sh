@@ -6,9 +6,7 @@ Long story short I have learned quite a bit about how Javascript and Bundling wo
 
 ## Scripts
 
-`start:ext` - Starts the bundler and builds the app to run as an extension
-
-`start:web` - Starts the bundler and builds the app to run as a web app
+`bundle` - Starts the bundler and builds the app to run as an extension
 
 `start:firefox` - Will load the `dist` folder into Firefox as an extension (to build a `dist` folder, run `start:ext`)
 
@@ -18,7 +16,7 @@ Long story short I have learned quite a bit about how Javascript and Bundling wo
 
 ### As a Chrome Extension
 
-- Run `start:ext` to start the bundler
+- Run `bundle` to start the bundler
 
 - Open Chrome and navigate to `chrome://extensions`
 
@@ -26,13 +24,10 @@ Long story short I have learned quite a bit about how Javascript and Bundling wo
 
 ### As a Firefox Extension
 
-- Run `start:ext` to start the bundler
+- Run `bundle` to start the bundler
 
 - Run `start:firefox` which will load the extension into Firefox and start it automatically.
 
-### As a web app
-
-Though this app is not meant to run as a web app, if you are not doing something that is extension related, it's often easier to run the app as a web app. To do so just run `start:web` and navigate to `localhost:1234`
 
 ## Project Structure
 
