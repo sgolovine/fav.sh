@@ -52,3 +52,10 @@ src/
 `icons/` - stores extension icons
 
 `manifest.json` - extension manifest
+
+
+## Keeping things clean
+
+Typecheck - `yarn tsc` will check the typescript types
+
+Prettier - `yarn format` will format the projects code with prettier
