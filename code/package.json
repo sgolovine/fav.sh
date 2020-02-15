@@ -7,7 +7,8 @@
     "bundle": "parcel ./src/manifest.json",
     "start:firefox": "web-ext run --source-dir ./dist",
     "format": "prettier --write './src/js/**/*.{ts,tsx}'",
-    "clean": "rm -rf ./dist ./.cache"
+    "clean": "rm -rf ./dist ./.cache",
+    "ci": "tsc && format"
   },
   "author": "Sunny Golovine",
   "license": "MIT",
