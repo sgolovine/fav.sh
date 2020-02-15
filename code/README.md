@@ -60,6 +60,7 @@ Typecheck - `yarn tsc` will check the typescript types
 
 Prettier - `yarn format` will format the projects code with prettier
 
+You can run both with `yarn ci`
 
 ## Debugging
 
