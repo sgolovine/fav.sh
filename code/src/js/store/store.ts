@@ -1,11 +1,8 @@
-// General Imports
-import { combineReducers, createStore } from 'redux'
+import { combineReducers, createStore, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import { localStorage } from 'redux-persist-webextension-storage'
-// Types
+import { DevTools } from './DevTools'
 import { AppState } from '../types/redux'
-
-// Inital State & Reducers
 import { initialState as moduleState, reducer as moduleReducer } from './module'
 
 const persistConfig = {
@@ -23,8 +20,10 @@ const rootReducer = combineReducers({
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-// TODO:
-// Finish store persistence
-// Finish devtools integration
+const enhancer = compose(DevTools.instrument())
 
-export const store = createStore(rootReducer, appInitialState)
+export function configureStore() {
+  const store = createStore(persistedReducer, appInitialState, enhancer)
+  const persistor = persistStore(store)
+  return { store, persistor }
+}

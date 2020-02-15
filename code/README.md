@@ -59,3 +59,8 @@ src/
 Typecheck - `yarn tsc` will check the typescript types
 
 Prettier - `yarn format` will format the projects code with prettier
+
+
+## Debugging
+
+Redux - This project ships with Redux devtools. Press ctrl + p to toggle the  redux panel. Note this panel is only included in the development version
