@@ -1,9 +1,28 @@
 import { combineReducers, createStore, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import { localStorage } from 'redux-persist-webextension-storage'
-import { DevTools } from './DevTools'
-import { AppState } from '../types/redux'
-import { initialState as moduleState, reducer as moduleReducer } from './module'
+import { DevTools } from 'js/store/DevTools'
+import { AppState } from 'js/types/redux'
+
+import {
+  initialState as bookmarksState,
+  reducer as bookmarksReducer,
+} from './modules/bookmarks'
+
+import {
+  initialState as searchState,
+  reducer as searchReducer,
+} from './modules/search'
+
+import {
+  initialState as syncState,
+  reducer as syncReducer,
+} from './modules/sync'
+
+import {
+  initialState as tagsState,
+  reducer as tagsReducer,
+} from './modules/tags'
 
 const persistConfig = {
   key: 'localStorage',
@@ -11,11 +30,17 @@ const persistConfig = {
 }
 
 const appInitialState: AppState = {
-  module: moduleState,
+  bookmarks: bookmarksState,
+  search: searchState,
+  sync: syncState,
+  tags: tagsState,
 }
 
 const rootReducer = combineReducers({
-  module: moduleReducer,
+  bookmarks: bookmarksReducer,
+  search: searchReducer,
+  sync: syncReducer,
+  tags: tagsReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
