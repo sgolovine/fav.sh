@@ -11,7 +11,7 @@
     "start:firefox": "web-ext run -t firefox-desktop --source-dir ./dist",
     "format": "prettier --write './src/js/**/*.{ts,tsx}'",
     "clean": "rm -rf ./dist ./.cache",
-    "ci": "tsc && format"
+    "ci": "tsc && yarn run format"
   },
   "author": "Sunny Golovine",
   "license": "MIT",
