@@ -4,8 +4,11 @@
   "description": "Fav Bookmark Manager",
   "main": "index.js",
   "scripts": {
+    "firefox": "run-p bundle start:firefox",
+    "chrome": "run-p bundle start:chrome",
     "bundle": "parcel ./src/manifest.json",
-    "start:firefox": "web-ext run --source-dir ./dist",
+    "start:chrome": "web-ext run -t chromium --source-dir ./dist",
+    "start:firefox": "web-ext run -t firefox-desktop --source-dir ./dist",
     "format": "prettier --write './src/js/**/*.{ts,tsx}'",
     "clean": "rm -rf ./dist ./.cache",
     "ci": "tsc && format"
@@ -32,6 +35,7 @@
     "@types/redux-devtools-dock-monitor": "^1.1.33",
     "@types/redux-devtools-log-monitor": "^1.0.34",
     "@types/styled-components": "^4.4.3",
+    "npm-run-all": "^4.1.5",
     "parcel": "^1.12.4",
     "parcel-plugin-web-extension": "^1.6.1",
     "prettier": "^1.19.1",
