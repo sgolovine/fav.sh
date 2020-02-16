@@ -1,5 +1,5 @@
-import { Tag } from 'js/types/Tag'
-import { AppAction, AppState } from 'js/types/redux'
+import { Tag } from '~/types/Tag'
+import { AppAction, AppState } from '~/types/redux'
 
 export type TagsState = {
   activeTags: Tag[]

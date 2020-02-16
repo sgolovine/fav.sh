@@ -1,5 +1,5 @@
-import { AppAction, AppState } from 'js/types/redux'
-import { BackupDetails } from 'js/types/BackupDetails'
+import { AppAction, AppState } from '~/types/redux'
+import { BackupDetails } from '~/types/BackupDetails'
 
 export type SyncState = {
   token?: string

@@ -1,7 +1,7 @@
-import { BookmarkState } from 'js/store/modules/bookmarks'
-import { SyncState } from 'js/store/modules/sync'
-import { SearchState } from 'js/store/modules/search'
-import { TagsState } from 'js/store/modules/tags'
+import { BookmarkState } from '~/store/modules/bookmarks'
+import { SyncState } from '~/store/modules/sync'
+import { SearchState } from '~/store/modules/search'
+import { TagsState } from '~/store/modules/tags'
 
 export type AppAction = {
   type: string

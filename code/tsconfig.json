@@ -9,7 +9,7 @@
     "strict": true,
     "baseUrl": "src",
     "paths": {
-      "*": ["./*"]
+      "~/*": ["./js/*"]
     },
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
@@ -25,3 +25,4 @@
     "index.d.ts"
   ]
 }
+ 

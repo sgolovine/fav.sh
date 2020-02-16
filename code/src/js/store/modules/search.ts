@@ -1,4 +1,4 @@
-import { AppAction, AppState } from 'js/types/redux'
+import { AppAction, AppState } from '~/types/redux'
 
 export type SearchState = {
   searchTerm: string

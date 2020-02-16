@@ -26,6 +26,7 @@
     "redux-devtools-log-monitor": "^1.4.0",
     "redux-persist": "^6.0.0",
     "redux-persist-webextension-storage": "^1.0.2",
+    "store": "^2.0.12",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
