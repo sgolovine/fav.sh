@@ -1,9 +1,11 @@
 import React from 'react'
 import Header, { HeaderText } from '~/components/common/Header'
-import { IconButton } from '@material-ui/core'
-import { MdCreate, MdMenu } from 'react-icons/md'
+import { IconButton, InputBase, Fab } from '@material-ui/core'
+import { MdCreate, MdMenu, MdSync } from 'react-icons/md'
 import styled from 'styled-components'
-import { Link } from '@reach/router'
+import { navigate } from '~/store/modules/navigation'
+import { useDispatch } from 'react-redux'
+import { BookmarkCard } from '~/components/BookmarkCard'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -13,29 +15,86 @@ const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
 
 const HeaderRightButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
-    <MdCreate color="#fff" />
+    <MdSync color="#fff" />
   </IconButton>
 )
 
-export const MainScreen = ({ path }: { path: string }) => {
+export const MainScreen = () => {
+  const dispatch = useDispatch()
+
+  const handleCategories = () => {
+    dispatch(navigate('categories'))
+  }
+
+  const handleAdd = () => {
+    dispatch(navigate('add'))
+  }
+
+  const handleSync = () => {
+    dispatch(navigate('sync'))
+  }
+
   return (
     <>
       <Header>
         <FlexContainer>
           <Section>
-            <Link to="/add">Add</Link>
-            <HeaderLeftButton onClick={() => {}} />
-            <HeaderText>Bookmarks</HeaderText>
+            <HeaderLeftButton onClick={handleCategories} />
+            <SearchBox
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
           </Section>
           <Section>
-            <HeaderRightButton onClick={() => {}} />
+            <HeaderRightButton onClick={handleSync} />
           </Section>
         </FlexContainer>
       </Header>
-      <p>Main Screen</p>
+      <BookmarkCard
+        guid="foo"
+        name="Some website"
+        href="http://some.href"
+        desc="A sample description of the site here"
+        tags={[
+          { name: 'foo', guid: 'foo' },
+          { name: 'bar', guid: 'foo' },
+          { name: 'baz', guid: 'foo' },
+        ]}
+      />
+      <BookmarkCard
+        guid="foo"
+        name="Some website"
+        href="http://some.href"
+        desc="A sample description of the site here"
+        tags={[
+          { name: 'foo', guid: 'foo' },
+          { name: 'bar', guid: 'foo' },
+          { name: 'baz', guid: 'foo' },
+        ]}
+      />
+      <BookmarkCard
+        guid="foo"
+        name="Some website"
+        href="http://some.href"
+        desc="A sample description of the site here"
+        tags={[
+          { name: 'foo', guid: 'foo' },
+          { name: 'bar', guid: 'foo' },
+          { name: 'baz', guid: 'foo' },
+        ]}
+      />
+      <PositionedFab onClick={handleAdd} color="primary">
+        <MdCreate size={28} />
+      </PositionedFab>
     </>
   )
 }
+
+const PositionedFab = styled(Fab)`
+  position: fixed;
+  bottom: 2.5em;
+  right: 2.5em;
+`
 
 const FlexContainer = styled.div`
   display: flex;
@@ -50,4 +109,9 @@ const Section = styled.div`
   flex-direction: row;
   align-self: center;
   align-items: center;
+`
+const SearchBox = styled(InputBase)`
+  color: inherit;
+  padding: 1px 1px 1px 7px;
+  width: 100%;
 `

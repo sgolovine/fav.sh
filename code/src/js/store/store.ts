@@ -24,6 +24,11 @@ import {
   reducer as tagsReducer,
 } from './modules/tags'
 
+import {
+  initialState as navigationState,
+  reducer as navigationReducer,
+} from './modules/navigation'
+
 const persistConfig = {
   key: 'localStorage',
   storage: localStorage,
@@ -34,6 +39,7 @@ const appInitialState: AppState = {
   search: searchState,
   sync: syncState,
   tags: tagsState,
+  navigation: navigationState,
 }
 
 const rootReducer = combineReducers({
@@ -41,6 +47,7 @@ const rootReducer = combineReducers({
   search: searchReducer,
   sync: syncReducer,
   tags: tagsReducer,
+  navigation: navigationReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

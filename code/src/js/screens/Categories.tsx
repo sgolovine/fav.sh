@@ -1,32 +1,31 @@
 import React from 'react'
 import Header, { HeaderText } from '~/components/common/Header'
 import { IconButton } from '@material-ui/core'
-import { MdCreate, MdArrowBack } from 'react-icons/md'
+import { MdArrowBack } from 'react-icons/md'
 import styled from 'styled-components'
+import { navigate } from '~/store/modules/navigation'
+import { useDispatch } from 'react-redux'
 
-const HeaderRightButton = () => (
-  <IconButton onClick={() => {}}>
-    <MdCreate color="#fff" />
-  </IconButton>
-)
-
-const HeaderLeftButton = () => (
-  <IconButton>
-    <MdArrowBack />
+const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
+  <IconButton onClick={onClick}>
+    <MdArrowBack color="#fff" />
   </IconButton>
 )
 
 export const Categories = () => {
+  const dispatch = useDispatch()
+
+  const goBack = () => {
+    dispatch(navigate('home'))
+  }
+
   return (
     <>
       <Header>
         <FlexContainer>
           <Section>
-            <HeaderLeftButton />
+            <HeaderLeftButton onClick={goBack} />
             <HeaderText>Categories</HeaderText>
-          </Section>
-          <Section>
-            <HeaderRightButton />
           </Section>
         </FlexContainer>
       </Header>
