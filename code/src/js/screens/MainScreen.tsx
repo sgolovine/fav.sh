@@ -4,8 +4,9 @@ import { IconButton, InputBase, Fab } from '@material-ui/core'
 import { MdCreate, MdMenu, MdSync } from 'react-icons/md'
 import styled from 'styled-components'
 import { navigate } from '~/store/modules/navigation'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { BookmarkCard } from '~/components/BookmarkCard'
+import { getBookmarks } from '~/store/modules/bookmarks'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -20,6 +21,7 @@ const HeaderRightButton = ({ onClick }: { onClick: () => void }) => (
 )
 
 export const MainScreen = () => {
+  const bookmarks = useSelector(getBookmarks)
   const dispatch = useDispatch()
 
   const handleCategories = () => {
@@ -32,6 +34,29 @@ export const MainScreen = () => {
 
   const handleSync = () => {
     dispatch(navigate('sync'))
+  }
+
+  const renderBookmarks = () => {
+    const bookmarkKeys = Object.keys(bookmarks)
+
+    if (bookmarkKeys.length === 0) {
+      return <p>Wow such empty</p>
+    }
+
+    return bookmarkKeys.map((key) => {
+      const currentBookmark = bookmarks[key]
+
+      return (
+        <BookmarkCard
+          key={currentBookmark.guid}
+          guid={currentBookmark.guid}
+          name={currentBookmark.name}
+          href={currentBookmark.href}
+          desc={currentBookmark.desc}
+          tags={currentBookmark.tags}
+        />
+      )
+    })
   }
 
   return (
@@ -50,39 +75,7 @@ export const MainScreen = () => {
           </Section>
         </FlexContainer>
       </Header>
-      <BookmarkCard
-        guid="foo"
-        name="Some website"
-        href="http://some.href"
-        desc="A sample description of the site here"
-        tags={[
-          { name: 'foo', guid: 'foo' },
-          { name: 'bar', guid: 'foo' },
-          { name: 'baz', guid: 'foo' },
-        ]}
-      />
-      <BookmarkCard
-        guid="foo"
-        name="Some website"
-        href="http://some.href"
-        desc="A sample description of the site here"
-        tags={[
-          { name: 'foo', guid: 'foo' },
-          { name: 'bar', guid: 'foo' },
-          { name: 'baz', guid: 'foo' },
-        ]}
-      />
-      <BookmarkCard
-        guid="foo"
-        name="Some website"
-        href="http://some.href"
-        desc="A sample description of the site here"
-        tags={[
-          { name: 'foo', guid: 'foo' },
-          { name: 'bar', guid: 'foo' },
-          { name: 'baz', guid: 'foo' },
-        ]}
-      />
+      <BookmarksContainer>{renderBookmarks()}</BookmarksContainer>
       <PositionedFab onClick={handleAdd} color="primary">
         <MdCreate size={28} />
       </PositionedFab>

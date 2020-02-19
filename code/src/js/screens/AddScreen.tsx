@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header, { HeaderText } from '~/components/common/Header'
 import { IconButton, TextField, Button } from '@material-ui/core'
-import { MdCreate, MdArrowBack } from 'react-icons/md'
+import { MdArrowBack } from 'react-icons/md'
 import styled from 'styled-components'
 import { navigate } from '~/store/modules/navigation'
 import { useDispatch } from 'react-redux'
+import { actions } from '~/store/modules/bookmarks'
+import { Bookmark } from '~/types/Bookmark'
+import uuid from 'uuid/v1'
+import { getActiveTab, Tab } from '~/browser/getTabInfo'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -13,6 +17,16 @@ const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
 )
 
 export const AddScreen = () => {
+  const [name, setName] = useState<string>('')
+  const [href, setHref] = useState<string>('')
+
+  useEffect(() => {
+    getActiveTab((tab: Tab) => {
+      setName(tab.title)
+      setHref(tab.url)
+    })
+  }, [])
+
   const dispatch = useDispatch()
 
   const goBack = () => {
@@ -20,6 +34,15 @@ export const AddScreen = () => {
   }
 
   const createBookmark = () => {
+    const bookmarkGuid = uuid()
+    const bookmark: Bookmark = {
+      guid: bookmarkGuid,
+      name,
+      href,
+      tags: [], // placeholder for tags later
+    }
+
+    dispatch(actions.add(bookmark))
     dispatch(navigate('home'))
   }
 
@@ -42,8 +65,18 @@ export const AddScreen = () => {
   const renderForm = () => (
     <FormContainer>
       <FieldsContainer>
-        <Text label="Name" variant="outlined" />
-        <Text label="Website" variant="outlined" />
+        <Text
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          label="Name"
+          variant="outlined"
+        />
+        <Text
+          value={href}
+          onChange={(e) => setHref(e.target.value)}
+          label="Website"
+          variant="outlined"
+        />
         <Text label="Description" variant="outlined" multiline rows="4" />
       </FieldsContainer>
     </FormContainer>

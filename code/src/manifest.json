@@ -16,5 +16,10 @@
     },
     "default_title": "Fav",
     "default_popup": "entry/extension.html"
-  }
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ]
 }
