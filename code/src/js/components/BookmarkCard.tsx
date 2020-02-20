@@ -3,24 +3,32 @@ import { IconButton } from '@material-ui/core'
 import { Bookmark } from '~/types/Bookmark'
 import { MdEdit, MdDelete } from 'react-icons/md'
 import styled from 'styled-components'
-import { actions } from '~/store/modules/bookmarks'
+import { actions as editingActions } from '~/store/modules/editing'
+import { actions as bookmarkActions } from '~/store/modules/bookmarks'
+import { navigate } from '~/store/modules/navigation'
 import { useDispatch } from 'react-redux'
 
 export const BookmarkCard = (bookmark: Bookmark) => {
   const dispatch = useDispatch()
+
+  const onEdit = () => {
+    dispatch(editingActions.setEditing(bookmark))
+    dispatch(navigate('add'))
+  }
+
+  const onRemove = () => dispatch(bookmarkActions.remove(bookmark.guid))
 
   return (
     <Card>
       <FlexCol>
         <Link href={bookmark.href}>{bookmark.name}</Link>
         <SmallLink href={bookmark.href}>{bookmark.href}</SmallLink>
-        <Desc>{bookmark.desc}</Desc>
       </FlexCol>
       <FlexRow>
-        <IconButton>
+        <IconButton onClick={onEdit}>
           <MdEdit />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={onRemove}>
           <MdDelete />
         </IconButton>
       </FlexRow>
@@ -48,6 +56,10 @@ const FlexRow = styled.div`
 `
 
 const Link = styled.a`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 375px;
   font-size: 18px;
   text-decoration: none;
   font-family: Roboto;

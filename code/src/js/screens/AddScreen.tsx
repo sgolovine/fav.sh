@@ -4,11 +4,15 @@ import { IconButton, TextField, Button } from '@material-ui/core'
 import { MdArrowBack } from 'react-icons/md'
 import styled from 'styled-components'
 import { navigate } from '~/store/modules/navigation'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { actions } from '~/store/modules/bookmarks'
 import { Bookmark } from '~/types/Bookmark'
 import uuid from 'uuid/v1'
 import { getActiveTab, Tab } from '~/browser/getTabInfo'
+import {
+  getEditingBookmark,
+  actions as editingActions,
+} from '~/store/modules/editing'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -17,32 +21,41 @@ const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
 )
 
 export const AddScreen = () => {
-  const [name, setName] = useState<string>('')
-  const [href, setHref] = useState<string>('')
+  const editingBookmark = useSelector(getEditingBookmark)
+  const freshGuid = uuid()
+
+  const [guid] = useState<string>(editingBookmark?.guid || freshGuid)
+  const [name, setName] = useState<string>(editingBookmark?.name || '')
+  const [href, setHref] = useState<string>(editingBookmark?.href || '')
+  const [desc, setDesc] = useState<string>(editingBookmark?.desc || '')
 
   useEffect(() => {
-    getActiveTab((tab: Tab) => {
-      setName(tab.title)
-      setHref(tab.url)
-    })
+    if (!editingBookmark) {
+      getActiveTab((tab: Tab) => {
+        setName(tab.title)
+        setHref(tab.url)
+      })
+    }
   }, [])
 
   const dispatch = useDispatch()
 
   const goBack = () => {
+    dispatch(editingActions.clearEditing())
     dispatch(navigate('home'))
   }
 
   const createBookmark = () => {
-    const bookmarkGuid = uuid()
     const bookmark: Bookmark = {
-      guid: bookmarkGuid,
+      guid,
       name,
       href,
+      desc,
       tags: [], // placeholder for tags later
     }
 
     dispatch(actions.add(bookmark))
+    dispatch(editingActions.clearEditing())
     dispatch(navigate('home'))
   }
 
@@ -55,7 +68,7 @@ export const AddScreen = () => {
         </Section>
         <Section>
           <ConfirmButton variant="outlined" onClick={createBookmark}>
-            Create Bookmark
+            {editingBookmark ? 'Edit' : 'Create'}
           </ConfirmButton>
         </Section>
       </FlexContainer>
@@ -77,7 +90,14 @@ export const AddScreen = () => {
           label="Website"
           variant="outlined"
         />
-        <Text label="Description" variant="outlined" multiline rows="4" />
+        <Text
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
+          label="Description"
+          variant="outlined"
+          multiline
+          rows="4"
+        />
       </FieldsContainer>
     </FormContainer>
   )

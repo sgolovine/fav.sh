@@ -1,5 +1,6 @@
 import { Bookmark } from '~/types/Bookmark'
 import { AppAction, AppState } from '~/types/redux'
+import omit from 'lodash/fp/omit'
 
 export type BookmarkState = {
   [guid: string]: Bookmark
@@ -29,7 +30,7 @@ export function reducer(
         [action.payload.guid]: action.payload,
       }
     case 'REMOVE_BOOKMARK':
-    // TODO: Implement this function
+      return omit([action.payload], state)
     default:
       return state
   }

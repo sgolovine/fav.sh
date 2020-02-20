@@ -29,6 +29,11 @@ import {
   reducer as navigationReducer,
 } from './modules/navigation'
 
+import {
+  initialState as editingState,
+  reducer as editingReducer,
+} from './modules/editing'
+
 const persistConfig = {
   key: 'localStorage',
   storage: localStorage,
@@ -40,6 +45,7 @@ const appInitialState: AppState = {
   sync: syncState,
   tags: tagsState,
   navigation: navigationState,
+  editing: editingState,
 }
 
 const rootReducer = combineReducers({
@@ -48,6 +54,7 @@ const rootReducer = combineReducers({
   sync: syncReducer,
   tags: tagsReducer,
   navigation: navigationReducer,
+  editing: editingReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
