@@ -3,12 +3,17 @@ import { IconButton } from '@material-ui/core'
 import { Bookmark } from '~/types/Bookmark'
 import { MdEdit, MdDelete } from 'react-icons/md'
 import styled from 'styled-components'
+import { actions } from '~/store/modules/bookmarks'
+import { useDispatch } from 'react-redux'
 
 export const BookmarkCard = (bookmark: Bookmark) => {
+  const dispatch = useDispatch()
+
   return (
     <Card>
       <FlexCol>
         <Link href={bookmark.href}>{bookmark.name}</Link>
+        <SmallLink href={bookmark.href}>{bookmark.href}</SmallLink>
         <Desc>{bookmark.desc}</Desc>
       </FlexCol>
       <FlexRow>
@@ -43,11 +48,22 @@ const FlexRow = styled.div`
 `
 
 const Link = styled.a`
-  font-size: 22px;
+  font-size: 18px;
   text-decoration: none;
   font-family: Roboto;
   line-height: 1.5em;
   padding-left: 0.25em;
+  color: #424242;
+  :visited {
+    color: #424242;
+  }
+  :hover {
+    color: #0277bd;
+  }
+`
+
+const SmallLink = styled(Link)`
+  font-size: 12.5px;
 `
 
 const Desc = styled.p`

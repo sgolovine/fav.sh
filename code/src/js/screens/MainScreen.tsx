@@ -43,20 +43,25 @@ export const MainScreen = () => {
       return <p>Wow such empty</p>
     }
 
-    return bookmarkKeys.map((key) => {
-      const currentBookmark = bookmarks[key]
+    return (
+      <>
+        {bookmarkKeys.map((key) => {
+          const currentBookmark = bookmarks[key]
 
-      return (
-        <BookmarkCard
-          key={currentBookmark.guid}
-          guid={currentBookmark.guid}
-          name={currentBookmark.name}
-          href={currentBookmark.href}
-          desc={currentBookmark.desc}
-          tags={currentBookmark.tags}
-        />
-      )
-    })
+          return (
+            <BookmarkCard
+              key={currentBookmark.guid}
+              guid={currentBookmark.guid}
+              name={currentBookmark.name}
+              href={currentBookmark.href}
+              desc={currentBookmark.desc}
+              tags={currentBookmark.tags}
+            />
+          )
+        })}
+        <Spacer />
+      </>
+    )
   }
 
   return (
@@ -82,6 +87,15 @@ export const MainScreen = () => {
     </>
   )
 }
+
+const Spacer = styled.div`
+  height: 50px;
+`
+
+const BookmarksContainer = styled.div`
+  height: 525px;
+  overflow-y: scroll;
+`
 
 const PositionedFab = styled(Fab)`
   position: fixed;
