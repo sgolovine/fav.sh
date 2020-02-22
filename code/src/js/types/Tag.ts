@@ -1,4 +1,1 @@
-export type Tag = {
-  guid: string
-  name: string
-}
+export type Tag = string

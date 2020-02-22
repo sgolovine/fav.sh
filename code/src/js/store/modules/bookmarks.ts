@@ -1,6 +1,7 @@
 import { Bookmark } from '~/types/Bookmark'
 import { AppAction, AppState } from '~/types/redux'
 import omit from 'lodash/fp/omit'
+import uniq from 'lodash/fp/uniq'
 
 export type BookmarkState = {
   [guid: string]: Bookmark
@@ -40,3 +41,19 @@ export const getBookmarks = (state: AppState) => state.bookmarks
 
 export const getBookmark = (state: AppState, guid: string) =>
   state.bookmarks[guid]
+
+export const getTags = (state: AppState) => {
+  const { bookmarks } = state
+  // Whats going on here:
+  // 1. Take all the tags arrays from all bookmarks
+  // 2. Flatten them into a single array using Array.flat()
+  // 3. Return only unique values using lodash.uniq()
+  const tags = uniq(
+    Object.keys(bookmarks)
+      .map((key) => bookmarks[key].tags)
+      .flat()
+  )
+  console.log(tags)
+
+  return tags
+}

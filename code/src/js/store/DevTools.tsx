@@ -8,7 +8,8 @@ export const DevTools = createDevTools(
     toggleVisibilityKey="ctrl-p"
     changePositionKey="ctrl-q"
     defaultIsVisible={false}
-    fluid
+    defaultSize={700}
+    fluid={false}
   >
     <LogMonitor theme="tomorrow" />
   </DockMonitor>
