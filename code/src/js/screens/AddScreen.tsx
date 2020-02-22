@@ -137,6 +137,9 @@ export const AddScreen = () => {
           label="Add New Tag"
           variant="outlined"
           onKeyUp={(event) => {
+            // This is so when the user hits the enter
+            // Key after entering a tag we can submit the tag
+            // Event.keycode 13 is the enter key
             if (event && event.keyCode === 13) {
               submitTag()
             }
