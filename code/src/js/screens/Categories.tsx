@@ -55,6 +55,7 @@ export const Categories = () => {
         {tags.map((tag) => {
           return (
             <CategoryItem
+              key={tag.toLowerCase().replace(' ', '-')}
               onSelect={() => handleSelect(tag)}
               selected={isTagSelected(tag)}
               label={tag}

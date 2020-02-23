@@ -53,7 +53,6 @@ export const getTags = (state: AppState) => {
       .map((key) => bookmarks[key].tags)
       .flat()
   )
-  console.log(tags)
 
   return tags
 }
