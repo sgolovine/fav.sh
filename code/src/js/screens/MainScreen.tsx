@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '~/components/common/Header'
 import { IconButton, InputBase, Fab, Drawer } from '@material-ui/core'
 import { MdCreate, MdMenu, MdSync } from 'react-icons/md'
@@ -10,6 +10,8 @@ import { getBookmarks } from '~/store/modules/bookmarks'
 import { Categories } from './Categories'
 import { getActiveTags } from '~/store/modules/tags'
 import intersection from 'lodash/fp/intersection'
+import { Bookmark } from '~/types/Bookmark'
+import escapeRegExp from 'lodash/fp/escapeRegExp'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -23,12 +25,26 @@ const HeaderRightButton = ({ onClick }: { onClick: () => void }) => (
   </IconButton>
 )
 
+// This function will filter bookmarks
+// Based on the search term enteredd
+function applySearch(searchTerm: string, bookmarks: Bookmark[]) {
+  const re = new RegExp(escapeRegExp(searchTerm), 'i')
+  return bookmarks.filter((bookmark: Bookmark) => re.test(bookmark.name))
+}
+
 export const MainScreen = () => {
   const bookmarks = useSelector(getBookmarks)
+  const bookmarksAsArray = Object.keys(bookmarks).map((key) => bookmarks[key])
   const activeTags = useSelector(getActiveTags)
   const dispatch = useDispatch()
 
   const [showSidebar, setShowSidebar] = useState<boolean>(false)
+
+  const [searchTerm, setSearchTerm] = useState('')
+
+  useEffect(() => {
+    console.log(searchTerm)
+  }, [searchTerm])
 
   const handleCategories = () => {
     setShowSidebar(!showSidebar)
@@ -43,48 +59,47 @@ export const MainScreen = () => {
   }
 
   const renderBookmarks = () => {
-    const bookmarkKeys = Object.keys(bookmarks)
+    let filteredBookmarks: Bookmark[] = []
 
-    if (bookmarkKeys.length === 0) {
+    // If we have tags that have been selected
+    // Filter bookmarks based on the intersection
+    // Of their tags versus the ones that have been selected
+    if (activeTags.length > 0) {
+      filteredBookmarks = bookmarksAsArray.filter(
+        (bookmark) => intersection(bookmark.tags, activeTags).length > 0
+      )
+      // If we do not have any active tags we apply all bookmarks
+      // To filtered bookmarks
+    } else {
+      filteredBookmarks = bookmarksAsArray
+    }
+
+    // After we are done filtering on tags we now check
+    // If there is anything in search that we need to filter
+    if (searchTerm) {
+      filteredBookmarks = applySearch(searchTerm, filteredBookmarks)
+    }
+
+    // If there are no filtered bookmarks
+    // After we finish our filtering then return an empty
+    // Component
+    if (filteredBookmarks.length === 0) {
       return <p>Wow such empty</p>
     }
 
-    // TODO:
-    // This could be more efficent, right now the component re-renders all elements
-    // When we filter by tags, not an issue now but something we want to fix in the future
     return (
       <>
-        {bookmarkKeys.map((key) => {
-          const currentBookmark = bookmarks[key]
-          // Check first if we even need to do filtering
-          // If activeTags = 0 then we return all of them
-          if (activeTags.length > 0) {
-            // Here we dont need to know which tags are similar
-            // Just that the bookmark and activeTags share 1 or more
-            if (intersection(currentBookmark.tags, activeTags).length > 0) {
-              return (
-                <BookmarkCard
-                  key={currentBookmark.guid}
-                  guid={currentBookmark.guid}
-                  name={currentBookmark.name}
-                  href={currentBookmark.href}
-                  desc={currentBookmark.desc}
-                  tags={currentBookmark.tags}
-                />
-              )
-            }
-          } else {
-            return (
-              <BookmarkCard
-                key={currentBookmark.guid}
-                guid={currentBookmark.guid}
-                name={currentBookmark.name}
-                href={currentBookmark.href}
-                desc={currentBookmark.desc}
-                tags={currentBookmark.tags}
-              />
-            )
-          }
+        {filteredBookmarks.map((bookmark) => {
+          return (
+            <BookmarkCard
+              key={bookmark.guid}
+              guid={bookmark.guid}
+              name={bookmark.name}
+              href={bookmark.href}
+              desc={bookmark.desc}
+              tags={bookmark.tags}
+            />
+          )
         })}
         <Spacer />
       </>
@@ -106,6 +121,8 @@ export const MainScreen = () => {
             <HeaderLeftButton onClick={handleCategories} />
             <SearchBox
               placeholder="Search…"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               inputProps={{ 'aria-label': 'search' }}
               autoFocus
               fullWidth
