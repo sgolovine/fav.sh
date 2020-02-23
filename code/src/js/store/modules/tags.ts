@@ -44,6 +44,3 @@ export function reducer(state: TagsState = initialState, action: AppAction) {
 }
 
 export const getActiveTags = (state: AppState) => state.tags.activeTags
-
-export const getShouldFilterBookmarks = (state: AppState) =>
-  state.tags.activeTags.length > 0 ? true : false
