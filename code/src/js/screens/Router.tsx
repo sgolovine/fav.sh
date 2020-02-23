@@ -4,7 +4,6 @@
 // simple UI, this won't hurt
 import React from 'react'
 import { AddScreen } from './AddScreen'
-import { Categories } from './Categories'
 import { MainScreen } from './MainScreen'
 import { useSelector } from 'react-redux'
 import { getCurrentScreen } from '~/store/modules/navigation'
@@ -15,8 +14,6 @@ export const Router = () => {
   switch (currentScreen) {
     case 'add':
       return <AddScreen />
-    case 'categories':
-      return <Categories />
     case 'home':
     case 'sync':
     default:

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
 export const HeaderText = ({ children }: { children: string }) => (
   <Typography variant="h6">{children}</Typography>

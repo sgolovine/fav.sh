@@ -1,12 +1,15 @@
-import React from 'react'
-import Header, { HeaderText } from '~/components/common/Header'
-import { IconButton, InputBase, Fab } from '@material-ui/core'
+import React, { useState } from 'react'
+import Header from '~/components/common/Header'
+import { IconButton, InputBase, Fab, Drawer } from '@material-ui/core'
 import { MdCreate, MdMenu, MdSync } from 'react-icons/md'
 import styled from 'styled-components'
 import { navigate } from '~/store/modules/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { BookmarkCard } from '~/components/BookmarkCard'
 import { getBookmarks } from '~/store/modules/bookmarks'
+import { Categories } from './Categories'
+import { getActiveTags } from '~/store/modules/tags'
+import intersection from 'lodash/fp/intersection'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -22,10 +25,13 @@ const HeaderRightButton = ({ onClick }: { onClick: () => void }) => (
 
 export const MainScreen = () => {
   const bookmarks = useSelector(getBookmarks)
+  const activeTags = useSelector(getActiveTags)
   const dispatch = useDispatch()
 
+  const [showSidebar, setShowSidebar] = useState<boolean>(false)
+
   const handleCategories = () => {
-    dispatch(navigate('categories'))
+    setShowSidebar(!showSidebar)
   }
 
   const handleAdd = () => {
@@ -43,21 +49,42 @@ export const MainScreen = () => {
       return <p>Wow such empty</p>
     }
 
+    // TODO:
+    // This could be more efficent, right now the component re-renders all elements
+    // When we filter by tags, not an issue now but something we want to fix in the future
     return (
       <>
         {bookmarkKeys.map((key) => {
           const currentBookmark = bookmarks[key]
-
-          return (
-            <BookmarkCard
-              key={currentBookmark.guid}
-              guid={currentBookmark.guid}
-              name={currentBookmark.name}
-              href={currentBookmark.href}
-              desc={currentBookmark.desc}
-              tags={currentBookmark.tags}
-            />
-          )
+          // Check first if we even need to do filtering
+          // If activeTags = 0 then we return all of them
+          if (activeTags.length > 0) {
+            // Here we dont need to know which tags are similar
+            // Just that the bookmark and activeTags share 1 or more
+            if (intersection(currentBookmark.tags, activeTags).length > 0) {
+              return (
+                <BookmarkCard
+                  key={currentBookmark.guid}
+                  guid={currentBookmark.guid}
+                  name={currentBookmark.name}
+                  href={currentBookmark.href}
+                  desc={currentBookmark.desc}
+                  tags={currentBookmark.tags}
+                />
+              )
+            }
+          } else {
+            return (
+              <BookmarkCard
+                key={currentBookmark.guid}
+                guid={currentBookmark.guid}
+                name={currentBookmark.name}
+                href={currentBookmark.href}
+                desc={currentBookmark.desc}
+                tags={currentBookmark.tags}
+              />
+            )
+          }
         })}
         <Spacer />
       </>
@@ -66,6 +93,13 @@ export const MainScreen = () => {
 
   return (
     <>
+      <Drawer
+        anchor="left"
+        open={showSidebar}
+        onClose={() => setShowSidebar(false)}
+      >
+        <Categories />
+      </Drawer>
       <Header>
         <FlexContainer>
           <Section>
@@ -73,6 +107,8 @@ export const MainScreen = () => {
             <SearchBox
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              autoFocus
+              fullWidth
             />
           </Section>
           <Section>
@@ -119,6 +155,9 @@ const Section = styled.div`
 `
 const SearchBox = styled(InputBase)`
   color: inherit;
-  padding: 1px 1px 1px 7px;
-  width: 100%;
+  padding: 3px 3px 3px 7px;
+  border: 1px solid #90a4ae;
+  border-radius: 7px;
+  width: 500px;
+  font-size: 22px;
 `

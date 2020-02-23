@@ -208,6 +208,7 @@ const CategoriesSelect = styled(Select)`
   flex-grow: 1;
   width: 150px;
   text-overflow: ellipsis;
+  margin-right: 5px;
 `
 
 const CategoriesText = styled(Text)`

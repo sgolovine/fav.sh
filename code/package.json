@@ -39,6 +39,7 @@
     "@babel/core": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@material-ui/types": "^5.0.0",
+    "@types/firefox-webext-browser": "^70.0.1",
     "@types/lodash": "^4.14.149",
     "@types/react": "^16.9.19",
     "@types/react-icons": "^3.0.0",

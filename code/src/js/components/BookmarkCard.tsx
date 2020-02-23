@@ -77,9 +77,3 @@ const Link = styled.a`
 const SmallLink = styled(Link)`
   font-size: 12.5px;
 `
-
-const Desc = styled.p`
-  font-size: 18px;
-  font-family: Roboto;
-  padding-left: 0.25em;
-`
