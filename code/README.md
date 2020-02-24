@@ -10,6 +10,11 @@ Long story short I have learned quite a bit about how Javascript and Bundling wo
 
 **chrome** - run `yarn chrome`, this will build the extension and open Chrome with the extension installed
 
+
+## How to build
+
+This feature as of now is very WIP. We are still trying to figure out why the extension won't run without a bundler connected and how the build process is supposed to work for extensions. This section will document the build process once we figure it out.
+
 ## Project Structure
 
 The project is structured with this basic structure
