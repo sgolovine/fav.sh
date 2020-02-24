@@ -7,6 +7,7 @@
     "firefox": "run-p bundle start:firefox",
     "chrome": "run-p bundle start:chrome",
     "bundle": "parcel ./src/manifest.json",
+    "build": "parcel build ./src/manifest.json",
     "start:chrome": "web-ext run -t chromium --source-dir ./dist",
     "start:firefox": "web-ext run -t firefox-desktop --source-dir ./dist",
     "format": "prettier --write './src/js/**/*.{ts,tsx}'",
