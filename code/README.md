@@ -51,3 +51,8 @@ You can run both with `yarn ci`
 ## Debugging
 
 Redux - This project ships with Redux devtools. Press ctrl + p to toggle the  redux panel. Note this panel is only included in the development version
+
+
+## Contributing 
+
+Feel free to check out this projects [TODO](TODO.md) to get a sense of things that need to be done. From there feel free to open a pull request. For non-technical users I really appreciate bug reports.
