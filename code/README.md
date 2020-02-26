@@ -4,6 +4,17 @@
 
 Long story short I have learned quite a bit about how Javascript and Bundling works since Fav.sh v1, rather than going back and trying to fix my mistakes in the original version, I've decided to rebuild the app from ground up instead.
 
+## Dependencies
+
+* NodeJS
+* yarn (npm install -g yarn)
+
+## Installation
+
+* Ensure that you have NodeJS and Yarn
+* `yarn`
+
+
 ## How to run
 
 **firefox** - run `yarn firefox`, this will build the extension and open Firefox with the extension installed
