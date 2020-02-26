@@ -1,6 +1,6 @@
 import { combineReducers, createStore, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
-import { localStorage } from 'redux-persist-webextension-storage'
+import localStorage from 'redux-persist/lib/storage'
 import { DevTools } from './DevTools'
 import { AppState } from '~/types/redux'
 

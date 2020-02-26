@@ -13,7 +13,7 @@ Long story short I have learned quite a bit about how Javascript and Bundling wo
 
 ## How to build
 
-This feature as of now is very WIP. We are still trying to figure out why the extension won't run without a bundler connected and how the build process is supposed to work for extensions. This section will document the build process once we figure it out.
+**firefox** - run `yarn build:firefox` to build the extension, the resulting zip file will be under `web-ext-artifacts`. Right now you if you want to run the extension you must do so under Addons > Debug > Install Temporary Extension. It will fail under a regular install because I haven't signed it.
 
 ## Project Structure
 
