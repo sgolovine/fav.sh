@@ -2,7 +2,7 @@
 Items I haven't gotten to yet
 
 ---
-* (General) Create a build process to build the app to Firefox and Chrome targets
+* (General) Create a build process to build the app to Chrome targets
 
 * (General) For some reason `redux-persist-webextension-storage` causes both Chrome and Firefox to crash in production. There has to be something wrong with the package. Either fork/patch the package or find another way.
 
@@ -18,3 +18,5 @@ Items I haven't gotten to yet
 Move any done tasks here
 
 ---
+
+* (General) Create a build process to build the app to Firefox targets

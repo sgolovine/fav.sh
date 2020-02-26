@@ -11,7 +11,7 @@
     "start:chrome": "web-ext run -t chromium --source-dir ./dist",
     "start:firefox": "web-ext run -t firefox-desktop --source-dir ./dist",
     "format": "prettier --write './src/js/**/*.{ts,tsx}'",
-    "clean": "rm -rf ./dist ./.cache",
+    "clean": "rm -rf ./dist ./.cache ./web-ext-artifacts",
     "ci": "tsc && yarn run format"
   },
   "author": "Sunny Golovine",
