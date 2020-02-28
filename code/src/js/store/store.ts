@@ -1,8 +1,10 @@
 import { combineReducers, createStore, compose } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
-import { localStorage } from 'redux-persist-webextension-storage'
 import { DevTools } from './DevTools'
 import { AppState } from '~/types/redux'
+import { createLocalStorage } from './storageAdapter'
+
+const localStorage = createLocalStorage()
 
 import {
   initialState as bookmarksState,
