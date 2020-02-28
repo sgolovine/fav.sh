@@ -4,6 +4,6 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Settings } from '../js/Settings'
+import { Settings } from '../js/settings/Settings'
 
 ReactDOM.render(<Settings />, document.getElementById('root'))
