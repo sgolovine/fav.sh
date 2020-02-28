@@ -5,7 +5,9 @@
 export function createLocalStorage() {
   const getItem = (key: string) => {
     return new Promise((resolve, reject) => {
-      const onSuccess = (item: any) => resolve(item)
+      // API returns the content as item[key]
+      // instead of item
+      const onSuccess = (item: any) => resolve(item[key])
 
       const onError = () => reject()
 
