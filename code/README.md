@@ -21,6 +21,7 @@ Long story short I have learned quite a bit about how Javascript and Bundling wo
 
 **chrome** - run `yarn chrome`, this will build the extension and open Chrome with the extension installed
 
+**settings page** - the settings page when accessed from the extension doesn't support hot reloading (¯\_(ツ)_/¯). If you are developing on the settings page I recommend running it directly using `start:settings`. Communication with the extension is accomplished via `browser.storage`
 
 ## How to build
 

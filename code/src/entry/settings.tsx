@@ -4,9 +4,6 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-const Settings = () => {
-  return <h1>Woohoo! A proper settings page!</h1>
-}
+import { Settings } from '../js/Settings'
 
 ReactDOM.render(<Settings />, document.getElementById('root'))

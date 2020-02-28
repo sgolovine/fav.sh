@@ -10,6 +10,7 @@
     "build:firefox": "yarn clean && parcel build ./src/manifest.json && web-ext build --source-dir ./dist",
     "start:chrome": "web-ext run -t chromium --source-dir ./dist",
     "start:firefox": "web-ext run -t firefox-desktop --source-dir ./dist",
+    "start:settings": "parcel ./src/entry/settings.html",
     "format": "prettier --write './src/js/**/*.{ts,tsx}'",
     "clean": "rm -rf ./dist ./.cache ./web-ext-artifacts",
     "ci": "tsc && yarn run format"
