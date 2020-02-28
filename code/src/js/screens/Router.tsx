@@ -1,7 +1,6 @@
 // For some reason I can't get traditional DOM routers
 // to work with this extension. Nomally this would be a terrible
-// idea but with only 3 - 4 simple routes, this won't hurt and
-// simple UI, this won't hurt
+// idea but with only 3 - 4 simple routes, this won't hurt
 import React from 'react'
 import { AddScreen } from './AddScreen'
 import { MainScreen } from './MainScreen'
@@ -15,7 +14,6 @@ export const Router = () => {
     case 'add':
       return <AddScreen />
     case 'home':
-    case 'sync':
     default:
       return <MainScreen />
   }

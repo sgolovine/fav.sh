@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Header from '~/components/common/Header'
 import { IconButton, InputBase, Fab, Drawer } from '@material-ui/core'
-import { MdCreate, MdMenu, MdSync } from 'react-icons/md'
+import { MdCreate, MdMenu } from 'react-icons/md'
+import { IoMdSettings } from 'react-icons/io'
 import styled from 'styled-components'
 import { navigate } from '~/store/modules/navigation'
 import { useDispatch, useSelector } from 'react-redux'
@@ -12,6 +13,7 @@ import { getActiveTags } from '~/store/modules/tags'
 import intersection from 'lodash/fp/intersection'
 import { Bookmark } from '~/types/Bookmark'
 import escapeRegExp from 'lodash/fp/escapeRegExp'
+import { openSettingsWindow } from '~/browser/openSettings'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -21,7 +23,7 @@ const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
 
 const HeaderRightButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
-    <MdSync color="#fff" />
+    <IoMdSettings color="#fff" />
   </IconButton>
 )
 
@@ -54,8 +56,8 @@ export const MainScreen = () => {
     dispatch(navigate('add'))
   }
 
-  const handleSync = () => {
-    dispatch(navigate('sync'))
+  const handleSettings = () => {
+    openSettingsWindow()
   }
 
   const renderBookmarks = () => {
@@ -129,7 +131,7 @@ export const MainScreen = () => {
             />
           </Section>
           <Section>
-            <HeaderRightButton onClick={handleSync} />
+            <HeaderRightButton onClick={handleSettings} />
           </Section>
         </FlexContainer>
       </Header>
