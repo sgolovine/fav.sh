@@ -9,7 +9,7 @@ Items I haven't gotten to yet
 * (Chrome) The extension uses browser.* actions which cause chrome to crap out (on add bookmark specifically). Helpers in the `browser` folder should re retrofitted to support chrome's `chrome.*` and firefox's `browser.*`
   * Update storage adapter to support chrome: Right now the storage adapter is declared with `browser.*`, this should be updated to support chrome as well
 
-
+* (JS) Regenerator Runtime errors are preventing use of async functions and thus blocking the local backup feature. This is widely documented on Github so look for clues and fixes there.
 
 
 ## DONE 
