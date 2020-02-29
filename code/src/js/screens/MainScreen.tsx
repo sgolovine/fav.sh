@@ -14,6 +14,7 @@ import intersection from 'lodash/fp/intersection'
 import { Bookmark } from '~/types/Bookmark'
 import escapeRegExp from 'lodash/fp/escapeRegExp'
 import { openSettingsWindow } from '~/browser/openSettings'
+import { isBlank } from '~/helpers'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -78,7 +79,7 @@ export const MainScreen = () => {
 
     // After we are done filtering on tags we now check
     // If there is anything in search that we need to filter
-    if (searchTerm) {
+    if (!isBlank(searchTerm)) {
       filteredBookmarks = applySearch(searchTerm, filteredBookmarks)
     }
 
