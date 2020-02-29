@@ -9,6 +9,7 @@ import {
   PaddedAction,
 } from './common'
 import { Typography } from '@material-ui/core'
+import { getBookmarksFromStorage } from '~/browser/getBookmarksFromStorage'
 
 export const LocalRestore = () => {
   const handleClick = () => {}
@@ -30,7 +31,13 @@ export const LocalRestore = () => {
 
 export const LocalBackup = () => {
   const [filename, setFilename] = useState('')
-  const handleBackup = () => {}
+
+  const handleBackup = () => {
+    getBookmarksFromStorage().then((bookmarks) => {
+      console.log(bookmarks)
+    })
+  }
+
   return (
     <SectionContainer>
       <SectionHeader>Backup</SectionHeader>

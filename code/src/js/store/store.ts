@@ -12,11 +12,6 @@ import {
 } from './modules/bookmarks'
 
 import {
-  initialState as searchState,
-  reducer as searchReducer,
-} from './modules/search'
-
-import {
   initialState as syncState,
   reducer as syncReducer,
 } from './modules/sync'
@@ -36,14 +31,15 @@ import {
   reducer as editingReducer,
 } from './modules/editing'
 
+export const storageKey = 'localStorage'
+
 const persistConfig = {
-  key: 'localStorage',
+  key: storageKey,
   storage: localStorage,
 }
 
 const appInitialState: AppState = {
   bookmarks: bookmarksState,
-  search: searchState,
   sync: syncState,
   tags: tagsState,
   navigation: navigationState,
@@ -52,7 +48,6 @@ const appInitialState: AppState = {
 
 const rootReducer = combineReducers({
   bookmarks: bookmarksReducer,
-  search: searchReducer,
   sync: syncReducer,
   tags: tagsReducer,
   navigation: navigationReducer,

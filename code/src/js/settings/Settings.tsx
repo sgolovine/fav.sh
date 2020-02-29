@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import React from 'react'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import { LocalBackup, LocalRestore } from './LocalBackupRestore'
 import { GistBackupRestore, AnonymousGistRestore } from './GistBackupRestore'
