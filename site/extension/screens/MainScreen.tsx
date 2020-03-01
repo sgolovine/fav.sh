@@ -13,7 +13,6 @@ import { getActiveTags } from "~/store/modules/tags";
 import intersection from "lodash/fp/intersection";
 import { Bookmark } from "~/types/Bookmark";
 import escapeRegExp from "lodash/fp/escapeRegExp";
-import { openSettingsWindow } from "~/browser/openSettings";
 import { isBlank } from "~/helpers";
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
@@ -49,10 +48,6 @@ export const MainScreen = () => {
 
   const handleAdd = () => {
     dispatch(navigate("add"));
-  };
-
-  const handleSettings = () => {
-    openSettingsWindow();
   };
 
   const renderBookmarks = () => {

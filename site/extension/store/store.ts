@@ -1,8 +1,6 @@
 import { combineReducers, createStore, compose } from "redux";
-import { persistStore, persistReducer } from "redux-persist";
 import { AppState } from "~/types/redux";
-
-const localStorage = createLocalStorage();
+import localStorage from "redux-persist/lib/storage";
 
 import {
   initialState as bookmarksState,
@@ -45,12 +43,7 @@ const rootReducer = combineReducers({
   editing: editingReducer
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const enhancer = compose(DevTools.instrument());
-
 export function configureStore() {
-  const store = createStore(persistedReducer, appInitialState, enhancer);
-  const persistor = persistStore(store);
-  return { store, persistor };
+  const store = createStore(rootReducer, appInitialState);
+  return { store };
 }

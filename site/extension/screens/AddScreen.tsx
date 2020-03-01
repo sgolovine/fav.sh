@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions, getTags } from "~/store/modules/bookmarks";
 import { Bookmark } from "~/types/Bookmark";
 import uuid from "uuid/v1";
-import { getActiveTab, Tab } from "~/browser/getTabInfo";
 import {
   getEditingBookmark,
   actions as editingActions

@@ -47,9 +47,7 @@ const App = () => {
       </HeaderContianer>
 
       <ContentContainer>
-        <AppContainer>
-          <p>App goes here</p>
-        </AppContainer>
+        <AppContainer>{/* <Extension /> */}</AppContainer>
       </ContentContainer>
     </Container>
   );
