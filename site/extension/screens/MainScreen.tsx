@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Header from "~/components/common/Header";
+import Header from "../components/common/Header";
 import { IconButton, InputBase, Fab, Drawer } from "@material-ui/core";
 import { MdCreate, MdMenu } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import styled from "styled-components";
-import { navigate } from "~/store/modules/navigation";
+import { navigate } from "../store/modules/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { BookmarkCard } from "~/components/BookmarkCard";
-import { getBookmarks } from "~/store/modules/bookmarks";
+import { BookmarkCard } from "../components/BookmarkCard";
+import { getBookmarks } from "../store/modules/bookmarks";
 import { Categories } from "./Categories";
-import { getActiveTags } from "~/store/modules/tags";
+import { getActiveTags } from "../store/modules/tags";
 import intersection from "lodash/fp/intersection";
-import { Bookmark } from "~/types/Bookmark";
+import { Bookmark } from "../types/Bookmark";
 import escapeRegExp from "lodash/fp/escapeRegExp";
-import { isBlank } from "~/helpers";
+import { isBlank } from "../helpers";
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -101,8 +101,8 @@ export const MainScreen = () => {
   return (
     <>
       <Drawer
-        anchor="left"
         open={showSidebar}
+        variant="permanent"
         onClose={() => setShowSidebar(false)}
       >
         <Categories />
@@ -112,6 +112,7 @@ export const MainScreen = () => {
           <Section>
             <HeaderLeftButton onClick={handleCategories} />
             <SearchBox
+              style={{ color: "white" }}
               placeholder="Search…"
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
@@ -142,8 +143,10 @@ const BookmarksContainer = styled.div`
 
 const PositionedFab = styled(Fab)`
   position: fixed;
+  left: 85%;
   bottom: 2.5em;
   right: 2.5em;
+  bottom: 15%;
 `;
 
 const FlexContainer = styled.div`

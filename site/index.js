@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-import { Bootstrap as Extension } from "./extension/App";
+import { App as Extension } from "./extension/App";
 
 const Container = styled.div`
   padding: 2em;
@@ -29,7 +29,7 @@ const ContentContainer = styled.div`
 `;
 
 const AppContainer = styled.div`
-  border: 3px solid;
+  border: 1px #333 solid;
   margin: 2.5.em;
   height: 600px;
   width: 800px;
@@ -47,7 +47,9 @@ const App = () => {
       </HeaderContianer>
 
       <ContentContainer>
-        <AppContainer>{/* <Extension /> */}</AppContainer>
+        <AppContainer>
+          <Extension />
+        </AppContainer>
       </ContentContainer>
     </Container>
   );

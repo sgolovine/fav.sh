@@ -1,6 +1,5 @@
-import { combineReducers, createStore, compose } from "redux";
-import { AppState } from "~/types/redux";
-import localStorage from "redux-persist/lib/storage";
+import { combineReducers, createStore } from "redux";
+import { AppState } from "..//types/redux";
 
 import {
   initialState as bookmarksState,
@@ -23,11 +22,6 @@ import {
 } from "./modules/editing";
 
 export const storageKey = "localStorage";
-
-const persistConfig = {
-  key: storageKey,
-  storage: localStorage
-};
 
 const appInitialState: AppState = {
   bookmarks: bookmarksState,

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Header, { HeaderText } from "~/components/common/Header";
+import React, { useState, useEffect } from "react";
+import Header, { HeaderText } from "../components/common/Header";
 import {
   IconButton,
   TextField,
@@ -10,18 +10,31 @@ import {
 } from "@material-ui/core";
 import { MdArrowBack, MdAdd } from "react-icons/md";
 import styled from "styled-components";
-import { navigate } from "~/store/modules/navigation";
+import { navigate } from "../store/modules/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { actions, getTags } from "~/store/modules/bookmarks";
-import { Bookmark } from "~/types/Bookmark";
+import { actions, getTags } from "../store/modules/bookmarks";
+import { Bookmark } from "../types/Bookmark";
 import uuid from "uuid/v1";
 import {
   getEditingBookmark,
   actions as editingActions
-} from "~/store/modules/editing";
-import { Tag } from "~/types/Tag";
+} from "../store/modules/editing";
+import { Tag } from "../types/Tag";
 import remove from "lodash/fp/remove";
 import uniq from "lodash/fp/uniq";
+
+const randomSites = [
+  {
+    name: "Google",
+    href: "http://www.google.com",
+    desc: "Google Home Page"
+  },
+  {
+    name: "Hacker News",
+    href: "http://news.ycombinator.com",
+    desc: "Hacker news from Y Combinator"
+  }
+];
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -40,6 +53,12 @@ export const AddScreen = () => {
   const [desc, setDesc] = useState<string>(editingBookmark?.desc || "");
   const [currentTag, setCurrentTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>(editingBookmark?.tags || []);
+
+  useEffect(() => {
+    setName(randomSites[0].name);
+    setHref(randomSites[0].href);
+    setDesc(randomSites[0].desc);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -85,7 +104,11 @@ export const AddScreen = () => {
           <HeaderText>Add</HeaderText>
         </Section>
         <Section>
-          <ConfirmButton variant="outlined" onClick={createBookmark}>
+          <ConfirmButton
+            variant="outlined"
+            onClick={createBookmark}
+            style={{ color: "white" }}
+          >
             Submit
           </ConfirmButton>
         </Section>
@@ -111,7 +134,7 @@ export const AddScreen = () => {
 
   const renderCategories = () => (
     <>
-      <CategoriesContainer>
+      <CategoriesContainer style={{ marginTop: "0.5em" }}>
         <CategoriesSelect
           variant="outlined"
           placeholder="Tags"
@@ -147,18 +170,21 @@ export const AddScreen = () => {
     <FormContainer>
       <FieldsContainer>
         <Text
+          style={{ marginTop: "0.5em" }}
           value={name}
           onChange={e => setName(e.target.value)}
           label="Name"
           variant="outlined"
         />
         <Text
+          style={{ marginTop: "0.5em" }}
           value={href}
           onChange={e => setHref(e.target.value)}
           label="Website"
           variant="outlined"
         />
         <Text
+          style={{ marginTop: "0.5em" }}
           value={desc}
           onChange={e => setDesc(e.target.value)}
           label="Description"
@@ -174,10 +200,14 @@ export const AddScreen = () => {
   return (
     <>
       {renderHeader()}
-      {renderForm()}
+      <Container>{renderForm()}</Container>
     </>
   );
 };
+
+const Container = styled.div`
+  padding: 0.5em;
+`;
 
 const CategoryChip = styled(Chip)`
   margin: 0.5em;
@@ -190,8 +220,7 @@ const ChipContainer = styled.div`
 `;
 
 const Text = styled(TextField)`
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  padding-top: 1.5em;
 `;
 
 const CategoriesSelect = styled(Select)`
