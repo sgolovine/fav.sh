@@ -31561,7 +31561,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n  border: 3px solid;\n  margin: 2.5.em;\n  height: 600px;\n  width: 800px;\n  align-self: center;\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -31571,7 +31571,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n  align-items: center;\n  display: flex;\n  flex-direction: column;\n  padding-top: 3em;\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -31581,7 +31581,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 24px;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -31591,7 +31591,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n  font-size: 32px;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -31601,7 +31601,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral([""]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -31635,7 +31635,7 @@ var ContentContainer = _styledComponents.default.div(_templateObject5());
 var AppContainer = _styledComponents.default.div(_templateObject6());
 
 var App = function App() {
-  return _react.default.createElement(Container, null, _react.default.createElement(HeaderContianer, null, _react.default.createElement(Header, null, "Fav.sh"), _react.default.createElement(Subheader, null, "Alternative bookmark manager for Chrome and Firefox.")));
+  return _react.default.createElement(Container, null, _react.default.createElement(HeaderContianer, null, _react.default.createElement(Header, null, "Fav.sh"), _react.default.createElement(Subheader, null, "Alternative bookmark manager for Chrome and Firefox.")), _react.default.createElement(ContentContainer, null, _react.default.createElement(AppContainer, null, _react.default.createElement("p", null, "App goes here"))));
 };
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById("root"));
@@ -31667,7 +31667,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44851" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45313" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

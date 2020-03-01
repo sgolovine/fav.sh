@@ -1,20 +1,40 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import styled from "styled-components"
+import React from "react";
+import ReactDOM from "react-dom";
+import styled from "styled-components";
+import { Bootstrap as Extension } from "./extension/App";
 
 const Container = styled.div`
   padding: 2em;
-`
+`;
 
-const HeaderContianer = styled.div``
+const HeaderContianer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
-const Header = styled.p``
+const Header = styled.p`
+  font-size: 32px;
+`;
 
-const Subheader = styled.p``
+const Subheader = styled.p`
+  font-size: 24px;
+`;
 
-const ContentContainer = styled.div``
+const ContentContainer = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 3em;
+`;
 
-const AppContainer = styled.div``
+const AppContainer = styled.div`
+  border: 3px solid;
+  margin: 2.5.em;
+  height: 600px;
+  width: 800px;
+  align-self: center;
+`;
 
 const App = () => {
   return (
@@ -25,8 +45,14 @@ const App = () => {
           Alternative bookmark manager for Chrome and Firefox.
         </Subheader>
       </HeaderContianer>
-    </Container>
-  )
-}
 
-ReactDOM.render(<App />, document.getElementById("root"))
+      <ContentContainer>
+        <AppContainer>
+          <p>App goes here</p>
+        </AppContainer>
+      </ContentContainer>
+    </Container>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
