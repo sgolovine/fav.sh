@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import LazyLoad from "react-lazyload";
 
 const Container = styled.div`
   padding: 2em;
@@ -41,6 +42,22 @@ const Content = styled.p`
   line-height: 1.8em;
 `;
 
+const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Image = styled.img`
+  margin: 1.5em;
+`;
+
+const StyledLink = styled(Link)`
+  margin: 1em;
+  font-size: 22px;
+`;
+
 export const Home = () => {
   return (
     <Container>
@@ -49,9 +66,19 @@ export const Home = () => {
         <Subheader>
           Alternative bookmark manager for Chrome and Firefox.
         </Subheader>
-        <Link to="/demo">Live Demo</Link>
+        <StyledLink to="/demo">Live Demo</StyledLink>
       </HeaderContianer>
-
+      <ImageContainer>
+        <LazyLoad height={400}>
+          <Image src="https://i.imgur.com/AzZImTO.png" height="400px" />
+        </LazyLoad>
+        <LazyLoad height={400}>
+          <Image src="https://i.imgur.com/ZIvRBEN.png" height="400px" />
+        </LazyLoad>
+        <LazyLoad height={400}>
+          <Image src="https://i.imgur.com/Y4S9P6I.png" height="400px" />
+        </LazyLoad>
+      </ImageContainer>
       <Section>
         <ContentSubheader>
           Browser Independent Bookmark Manager
