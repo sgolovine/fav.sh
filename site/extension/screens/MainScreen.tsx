@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../components/common/Header";
-import { IconButton, InputBase, Fab, Drawer } from "@material-ui/core";
+import { IconButton, InputBase, Fab } from "@material-ui/core";
 import { MdCreate, MdMenu } from "react-icons/md";
-import { IoMdSettings } from "react-icons/io";
 import styled from "styled-components";
 import { navigate } from "../store/modules/navigation";
 import { useDispatch, useSelector } from "react-redux";
