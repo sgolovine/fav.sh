@@ -14,6 +14,7 @@ import intersection from "lodash/fp/intersection";
 import { Bookmark } from "../types/Bookmark";
 import escapeRegExp from "lodash/fp/escapeRegExp";
 import { isBlank } from "../helpers";
+import Sidebar from "react-sidebar";
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -37,10 +38,6 @@ export const MainScreen = () => {
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
 
   const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    console.log(searchTerm);
-  }, [searchTerm]);
 
   const handleCategories = () => {
     setShowSidebar(!showSidebar);
@@ -100,34 +97,34 @@ export const MainScreen = () => {
 
   return (
     <>
-      <Drawer
+      <Sidebar
+        sidebar={<Categories />}
         open={showSidebar}
-        variant="permanent"
-        onClose={() => setShowSidebar(false)}
+        docked={showSidebar}
+        onSetOpen={() => setShowSidebar(true)}
       >
-        <Categories />
-      </Drawer>
-      <Header>
-        <FlexContainer>
-          <Section>
-            <HeaderLeftButton onClick={handleCategories} />
-            <SearchBox
-              style={{ color: "white" }}
-              placeholder="Search…"
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-              inputProps={{ "aria-label": "search" }}
-              autoFocus
-              fullWidth
-            />
-          </Section>
-          <Section></Section>
-        </FlexContainer>
-      </Header>
-      <BookmarksContainer>{renderBookmarks()}</BookmarksContainer>
-      <PositionedFab onClick={handleAdd} color="primary">
-        <MdCreate size={28} />
-      </PositionedFab>
+        <Header>
+          <FlexContainer>
+            <Section>
+              <HeaderLeftButton onClick={handleCategories} />
+              <SearchBox
+                style={{ color: "white" }}
+                placeholder="Search…"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                inputProps={{ "aria-label": "search" }}
+                autoFocus
+                fullWidth
+              />
+            </Section>
+            <Section></Section>
+          </FlexContainer>
+        </Header>
+        <BookmarksContainer>{renderBookmarks()}</BookmarksContainer>
+        <PositionedFab onClick={handleAdd} color="primary">
+          <MdCreate size={28} />
+        </PositionedFab>
+      </Sidebar>
     </>
   );
 };
@@ -137,7 +134,7 @@ const Spacer = styled.div`
 `;
 
 const BookmarksContainer = styled.div`
-  height: 525px;
+  height: 450px;
   overflow-y: scroll;
 `;
 

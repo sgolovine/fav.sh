@@ -7,7 +7,22 @@ export type BookmarkState = {
   [guid: string]: Bookmark;
 };
 
-export const initialState: BookmarkState = {};
+export const initialState: BookmarkState = {
+  sample: {
+    guid: "sample",
+    name: "Google",
+    href: "https://google.com",
+    desc: "The Google home page",
+    tags: ["search-engine"]
+  },
+  sample1: {
+    guid: "sample1",
+    name: "Apple",
+    href: "https://apple.com",
+    desc: "The Apple home page",
+    tags: ["product", "service"]
+  }
+};
 
 export const actions = {
   add: (bookmark: Bookmark) => ({
