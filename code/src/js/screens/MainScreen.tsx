@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Header from '~/components/common/Header'
-import { IconButton, InputBase, Fab, Drawer } from '@material-ui/core'
-import { MdCreate, MdMenu } from 'react-icons/md'
+import { IconButton, InputBase, Button } from '@material-ui/core'
+import { MdMenu } from 'react-icons/md'
 import { IoMdSettings } from 'react-icons/io'
 import styled from 'styled-components'
 import { navigate } from '~/store/modules/navigation'
@@ -15,6 +15,7 @@ import { Bookmark } from '~/types/Bookmark'
 import escapeRegExp from 'lodash/fp/escapeRegExp'
 import { openSettingsWindow } from '~/browser/openSettings'
 import { isBlank } from '~/helpers'
+import Sidebar from 'react-sidebar'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
@@ -22,10 +23,25 @@ const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   </IconButton>
 )
 
-const HeaderRightButton = ({ onClick }: { onClick: () => void }) => (
-  <IconButton onClick={onClick}>
-    <IoMdSettings color="#fff" />
-  </IconButton>
+const HeaderRightButton = ({
+  onClick,
+  onAdd,
+}: {
+  onClick: () => void
+  onAdd: () => void
+}) => (
+  <>
+    <IconButton onClick={onClick}>
+      <IoMdSettings color="#fff" />
+    </IconButton>
+    <Button
+      variant="outlined"
+      style={{ color: '#fff', borderRadius: '10px', borderColor: 'white' }}
+      onClick={() => onAdd()}
+    >
+      Add Bookmark
+    </Button>
+  </>
 )
 
 // This function will filter bookmarks
@@ -104,20 +120,12 @@ export const MainScreen = () => {
             />
           )
         })}
-        <Spacer />
       </>
     )
   }
 
   return (
     <>
-      <Drawer
-        anchor="left"
-        open={showSidebar}
-        onClose={() => setShowSidebar(false)}
-      >
-        <Categories />
-      </Drawer>
       <Header>
         <FlexContainer>
           <Section>
@@ -129,34 +137,35 @@ export const MainScreen = () => {
               inputProps={{ 'aria-label': 'search' }}
               autoFocus
               fullWidth
+              style={{ color: 'white' }}
             />
           </Section>
           <Section>
-            <HeaderRightButton onClick={handleSettings} />
+            <HeaderRightButton onAdd={handleAdd} onClick={handleSettings} />
           </Section>
         </FlexContainer>
       </Header>
-      <BookmarksContainer>{renderBookmarks()}</BookmarksContainer>
-      <PositionedFab onClick={handleAdd} color="primary">
-        <MdCreate size={28} />
-      </PositionedFab>
+      <Sidebar
+        sidebar={<Categories />}
+        open={showSidebar}
+        docked={showSidebar}
+        onSetOpen={() => setShowSidebar(true)}
+        rootClassName="sidebar-content"
+        styles={{ sidebar: { background: 'white' } }}
+      >
+        <ContentContainer>{renderBookmarks()}</ContentContainer>
+      </Sidebar>
     </>
   )
 }
 
-const Spacer = styled.div`
-  height: 50px;
-`
-
-const BookmarksContainer = styled.div`
-  height: 525px;
-  overflow-y: scroll;
-`
-
-const PositionedFab = styled(Fab)`
-  position: fixed;
-  bottom: 2.5em;
-  right: 2.5em;
+const ContentContainer = styled.div`
+  flex-grow: 1;
+  position: absolute;
+  left: 1em;
+  right: 1em;
+  top: 1em;
+  bottom: 1em;
 `
 
 const FlexContainer = styled.div`
@@ -176,8 +185,9 @@ const Section = styled.div`
 const SearchBox = styled(InputBase)`
   color: inherit;
   padding: 3px 3px 3px 7px;
-  border: 1px solid #90a4ae;
+  border: 2px solid #90a4ae;
   border-radius: 7px;
-  width: 500px;
   font-size: 22px;
+  color: white;
+  width: 100%;
 `

@@ -1,7 +1,10 @@
-html,
-body {
-  height: 600px;
-  /* width: 500px; */
-  width: 800px;
-  overflow-x: hidden;
+html,body {
+  min-height: 600px;
+  min-width: 800px;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4em;
 }

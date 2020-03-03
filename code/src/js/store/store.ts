@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { DevTools } from './DevTools'
 import { AppState } from '~/types/redux'
 import { createLocalStorage } from './storageAdapter'
+import webStorage from 'redux-persist/lib/storage'
 
 const localStorage = createLocalStorage()
 
@@ -33,9 +34,14 @@ import {
 
 export const storageKey = 'localStorage'
 
-const persistConfig = {
-  key: storageKey,
+const extensionConfig = {
+  key: 'extension',
   storage: localStorage,
+}
+
+const webConfig = {
+  key: 'web',
+  storage: webStorage,
 }
 
 const appInitialState: AppState = {
@@ -54,12 +60,23 @@ const rootReducer = combineReducers({
   editing: editingReducer,
 })
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const createPersistReducer = (config: any) =>
+  persistReducer(config, rootReducer)
 
 const enhancer = compose(DevTools.instrument())
 
 export function configureStore() {
-  const store = createStore(persistedReducer, appInitialState, enhancer)
+  const store = createStore(
+    createPersistReducer(extensionConfig),
+    appInitialState,
+    enhancer
+  )
+  const persistor = persistStore(store)
+  return { store, persistor }
+}
+
+export function configureWebStore() {
+  const store = createStore(createPersistReducer(webConfig), appInitialState)
   const persistor = persistStore(store)
   return { store, persistor }
 }
