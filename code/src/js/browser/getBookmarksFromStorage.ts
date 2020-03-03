@@ -13,6 +13,7 @@ export async function getBookmarksFromStorage() {
     const onSuccess = (item: any) => {
       console.log(item)
       console.log(item[key])
+      resolve(item)
       // const deserializedStore = JSON.parse(content[key])
       // const deserializedBookmarks = JSON.parse(deserializedStore.bookmarks)
       // resolve(deserializedBookmarks)
