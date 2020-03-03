@@ -1,0 +1,14 @@
+{
+  "presets": ["@babel/preset-react"],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": ["*"],
+        "alias": {
+          "~": "./extension"
+        }
+      }
+    ]
+  ]
+}

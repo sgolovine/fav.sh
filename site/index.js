@@ -1,32 +1,22 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import styled from "styled-components"
+import React from "react";
+import { Demo } from "./pages/demo";
+import { Home } from "./pages/home";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import ReactDOM from "react-dom";
 
-const Container = styled.div`
-  padding: 2em;
-`
-
-const HeaderContianer = styled.div``
-
-const Header = styled.p``
-
-const Subheader = styled.p``
-
-const ContentContainer = styled.div``
-
-const AppContainer = styled.div``
-
-const App = () => {
+function Router() {
   return (
-    <Container>
-      <HeaderContianer>
-        <Header>Fav.sh</Header>
-        <Subheader>
-          Alternative bookmark manager for Chrome and Firefox.
-        </Subheader>
-      </HeaderContianer>
-    </Container>
-  )
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/demo">
+          <Demo />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"))
+ReactDOM.render(<Router />, document.getElementById("root"));
