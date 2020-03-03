@@ -6,6 +6,11 @@
       "alias": {
         "~": "./src/js"
       }
-    }]
+    }],
+    ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
   ]
 }

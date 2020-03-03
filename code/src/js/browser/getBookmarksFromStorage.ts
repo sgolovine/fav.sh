@@ -10,10 +10,12 @@ import { storageKey } from '~/store/store'
 export async function getBookmarksFromStorage() {
   const key = `persist:${storageKey}`
   return new Promise((resolve, reject) => {
-    const onSuccess = (content: any) => {
-      const deserializedStore = JSON.parse(content[key])
-      const deserializedBookmarks = JSON.parse(deserializedStore.bookmarks)
-      resolve(deserializedBookmarks)
+    const onSuccess = (item: any) => {
+      console.log(item)
+      console.log(item[key])
+      // const deserializedStore = JSON.parse(content[key])
+      // const deserializedBookmarks = JSON.parse(deserializedStore.bookmarks)
+      // resolve(deserializedBookmarks)
     }
 
     const onError = () => reject()
