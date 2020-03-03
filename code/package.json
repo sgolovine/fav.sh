@@ -8,7 +8,6 @@
     "chrome": "run-p bundle start:chrome",
     "bundle": "parcel ./src/manifest.json ./src/entry/settings.html",
     "build:firefox": "yarn clean && parcel build ./src/manifest.json && web-ext build --source-dir ./dist",
-    "build:site": "yarn clean && parcel build ./src/entry/site.html --no-source-maps",
     "start:chrome": "web-ext run -t chromium --source-dir ./dist",
     "start:firefox": "web-ext run -t firefox-desktop --source-dir ./dist",
     "start:settings": "parcel ./src/entry/settings.html",
