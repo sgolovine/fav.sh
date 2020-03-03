@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "yarn clean && parcel build index.html --no-source-maps",
+    "test:prod": "yarn build && serve -s dist/",
+    "clean": "rm -rf ./dist ./.cache node_modules && yarn"
   },
   "keywords": [
     "bookmark",
@@ -25,8 +27,10 @@
     "lodash": "^4.17.15",
     "react": "^0.14.0 || ^15.0.0 || ^16.0.0",
     "react-dom": "^0.14.0 || ^15.0.0 || ^16.0.0",
+    "react-github-btn": "^1.1.1",
     "react-icons": "^3.9.0",
     "react-lazyload": "^2.6.5",
+    "react-player": "^1.15.2",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-sidebar": "^3.0.2",
@@ -41,6 +45,7 @@
     "@types/react-sidebar": "^3.0.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "parcel": "^1.12.4",
+    "serve": "^11.3.0",
     "typescript": "^3.8.3"
   }
 }

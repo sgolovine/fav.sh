@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import LazyLoad from "react-lazyload";
+import GitHubButton from "react-github-btn";
 
 const Container = styled.div`
   padding: 2em;
@@ -58,6 +59,23 @@ const StyledLink = styled(Link)`
   font-size: 22px;
 `;
 
+const Video = styled.iframe`
+  width: 100%;
+`;
+
+const FlexSubheaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const FlexBetween = styled(FlexSubheaderContainer)`
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const ComingSoonText = styled.p``;
+
 export const Home = () => {
   return (
     <Container>
@@ -66,8 +84,23 @@ export const Home = () => {
         <Subheader>
           Alternative bookmark manager for Chrome and Firefox.
         </Subheader>
-        <StyledLink to="/demo">Live Demo</StyledLink>
+        <FlexSubheaderContainer>
+          <StyledLink to="/demo">Live Demo</StyledLink>
+          <GitHubButton
+            href="https://github.com/sgolovine/fav.sh"
+            data-size="large"
+            data-show-count="true"
+            aria-label="Star sgolovine/fav.sh on GitHub"
+          >
+            Star
+          </GitHubButton>
+        </FlexSubheaderContainer>
       </HeaderContianer>
+      <Video
+        height="400px"
+        src="https://streamable.com/s/9pdpv/lrhvm"
+        allowFullScreen
+      ></Video>
       <ImageContainer>
         <LazyLoad height={400}>
           <Image src="https://i.imgur.com/AzZImTO.png" height="400px" />
@@ -80,6 +113,18 @@ export const Home = () => {
         </LazyLoad>
       </ImageContainer>
       <Section>
+        <FlexBetween>
+          <a href="https://chrome.google.com/webstore/detail/fav-bookmark-manager/gammmbkeceiljlgijimbhhgkfmiejnkl?hl=en">
+            <LazyLoad height={58}>
+              <Image
+                src="https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_206x58.png"
+                height="58px"
+              />
+            </LazyLoad>
+          </a>
+
+          <ComingSoonText>Firefox Coming Soon!</ComingSoonText>
+        </FlexBetween>
         <ContentSubheader>
           Browser Independent Bookmark Manager
         </ContentSubheader>
