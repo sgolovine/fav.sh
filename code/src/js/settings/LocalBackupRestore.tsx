@@ -13,6 +13,8 @@ import { getBookmarksFromStorage } from '~/browser/getBookmarksFromStorage'
 import { BookmarkState } from '~/store/modules/bookmarks'
 import { saveAs } from 'file-saver'
 import { FileUploader } from '~/components/FileUploader'
+import { transformExportBookmark } from '~/helpers'
+import { Bookmark } from '~/types/Bookmark'
 
 export const LocalRestore = () => {
   const handleFile = (content: any) => {
@@ -50,12 +52,25 @@ export const LocalBackup = () => {
 
   const handleBackup = () => {
     getBookmarksFromStorage().then((bookmarks) => {
-      // console.log(bookmarks)
       if (bookmarks && Object.keys(bookmarks as BookmarkState).length > 0) {
-        const bookmarksToExport = JSON.stringify(bookmarks, null, 2)
+        // Transform the bookmarks
+        const transformedBookmarks = Object.keys(
+          bookmarks as BookmarkState
+        ).map((key) => {
+          return transformExportBookmark(
+            (bookmarks as BookmarkState)[key] as Bookmark
+          )
+        })
+
+        // Stringify the results
+        const bookmarksToExport = JSON.stringify(transformedBookmarks, null, 2)
+
+        // Convert to a blob
         const bookmarksBlob = new Blob([bookmarksToExport], {
           type: 'application/json',
         })
+
+        // Ssve the file to the users computer
         saveAs(bookmarksBlob, `${filename}.json`)
         return
       }

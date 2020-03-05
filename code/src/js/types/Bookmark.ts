@@ -7,3 +7,10 @@ export type Bookmark = {
   href: string
   tags: Tag[]
 }
+
+export type ExportedBookmark = {
+  name: string
+  href: string
+  desc?: string
+  tags?: Tag[]
+}
