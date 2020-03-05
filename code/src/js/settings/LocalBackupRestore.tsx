@@ -10,6 +10,8 @@ import {
 } from './common'
 import { Typography } from '@material-ui/core'
 import { getBookmarksFromStorage } from '~/browser/getBookmarksFromStorage'
+import { BookmarkState } from '~/store/modules/bookmarks'
+import { saveAs } from 'file-saver'
 
 export const LocalRestore = () => {
   const handleClick = () => {}
@@ -34,7 +36,15 @@ export const LocalBackup = () => {
 
   const handleBackup = () => {
     getBookmarksFromStorage().then((bookmarks) => {
-      console.log(bookmarks)
+      // console.log(bookmarks)
+      if (bookmarks && Object.keys(bookmarks as BookmarkState).length > 0) {
+        const bookmarksToExport = JSON.stringify(bookmarks, null, 2)
+        const bookmarksBlob = new Blob([bookmarksToExport], {
+          type: 'application/json',
+        })
+        saveAs(bookmarksBlob, `${filename}.json`)
+        return
+      }
     })
   }
 
