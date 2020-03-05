@@ -12,9 +12,23 @@ import { Typography } from '@material-ui/core'
 import { getBookmarksFromStorage } from '~/browser/getBookmarksFromStorage'
 import { BookmarkState } from '~/store/modules/bookmarks'
 import { saveAs } from 'file-saver'
+import { FileUploader } from '~/components/FileUploader'
 
 export const LocalRestore = () => {
-  const handleClick = () => {}
+  const handleFile = (content: any) => {
+    /** File handling
+     *  1. Validate the file
+     *  2. Get the current redux store
+     *  3. Deserialize the store
+     *  4. Insert the boomkmarks in the store
+     *  5. Serialize the store again
+     *  6. Set the new store
+     *
+     *  This should be as generic as possible
+     *  because we will be re-using the component
+     *  when we will work on gist restoration
+     */
+  }
 
   return (
     <SectionContainer>
@@ -24,7 +38,7 @@ export const LocalRestore = () => {
           Restore your bookmarks from a JSON file on your computer
         </Typography>
         <PaddedAction>
-          <SettingsButton onClick={handleClick} text="Select File" />
+          <FileUploader onFile={(content: any) => console.log(content)} />
         </PaddedAction>
       </SectionContent>
     </SectionContainer>
