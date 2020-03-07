@@ -127,6 +127,7 @@ export const AddScreen = () => {
           variant="outlined"
           placeholder="Tags"
           onChange={submitMenuTag}
+          disabled={existingTags.length === 0}
         >
           {existingTags.map((tag) => {
             return <MenuItem value={tag}>{tag}</MenuItem>
