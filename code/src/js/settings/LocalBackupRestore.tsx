@@ -9,8 +9,7 @@ import {
   PaddedAction,
 } from './common'
 import { Typography } from '@material-ui/core'
-import { getBookmarksFromStorage } from '~/browser/getBookmarksFromStorage'
-import { BookmarkState } from '~/store/modules/bookmarks'
+import { BookmarkState, getBookmarks, actions } from '~/store/modules/bookmarks'
 import { saveAs } from 'file-saver'
 import { FileUploader } from '~/components/FileUploader'
 import {
@@ -20,8 +19,11 @@ import {
   generateBookmarkGuid,
 } from '~/helpers'
 import { Bookmark, ExportedBookmark } from '~/types/Bookmark'
+import { useSelector, useDispatch } from 'react-redux'
 
 export const LocalRestore = () => {
+  const dispatch = useDispatch()
+
   const handleFile = (content: any) => {
     /** File handling
      *  1. Validate the file
@@ -37,7 +39,7 @@ export const LocalRestore = () => {
      */
     const error = () => alert('Could not import bookmarks')
 
-    let exportedBookmarks: BookmarkState = {}
+    let bookmarks: BookmarkState = {}
     try {
       // Convert the JSON file to a JS object
       const parsedBookmarks = JSON.parse(content)
@@ -49,8 +51,8 @@ export const LocalRestore = () => {
           return
         } else {
           const bookmarkGuid = generateBookmarkGuid()
-          exportedBookmarks = {
-            ...exportedBookmarks,
+          bookmarks = {
+            ...bookmarks,
             [bookmarkGuid]: transformImportBookmark(bookmark, bookmarkGuid),
           }
         }
@@ -60,7 +62,8 @@ export const LocalRestore = () => {
       error()
       return
     } finally {
-      console.log('Import Complete!!!', exportedBookmarks)
+      dispatch(actions.setBookmarks(bookmarks))
+      alert('Restore sucessfull!')
       return
     }
   }
@@ -72,6 +75,9 @@ export const LocalRestore = () => {
         <Typography>
           Restore your bookmarks from a JSON file on your computer
         </Typography>
+        <Typography>
+          NOTE: This will overwrite any bookmarks you currently have saved!
+        </Typography>
         <PaddedAction>
           <FileUploader onFile={handleFile} />
         </PaddedAction>
@@ -82,32 +88,31 @@ export const LocalRestore = () => {
 
 export const LocalBackup = () => {
   const [filename, setFilename] = useState('')
+  const bookmarks = useSelector(getBookmarks)
 
   const handleBackup = () => {
-    getBookmarksFromStorage().then((bookmarks) => {
-      if (bookmarks && Object.keys(bookmarks as BookmarkState).length > 0) {
-        // Transform the bookmarks
-        const transformedBookmarks = Object.keys(
-          bookmarks as BookmarkState
-        ).map((key) => {
+    if (bookmarks && Object.keys(bookmarks).length > 0) {
+      // Transform the bookmarks
+      const transformedBookmarks = Object.keys(bookmarks as BookmarkState).map(
+        (key) => {
           return transformExportBookmark(
             (bookmarks as BookmarkState)[key] as Bookmark
           )
-        })
+        }
+      )
 
-        // Stringify the results
-        const bookmarksToExport = JSON.stringify(transformedBookmarks, null, 2)
+      // Stringify the results
+      const bookmarksToExport = JSON.stringify(transformedBookmarks, null, 2)
 
-        // Convert to a blob
-        const bookmarksBlob = new Blob([bookmarksToExport], {
-          type: 'application/json',
-        })
+      // Convert to a blob
+      const bookmarksBlob = new Blob([bookmarksToExport], {
+        type: 'application/json',
+      })
 
-        // Ssve the file to the users computer
-        saveAs(bookmarksBlob, `${filename}.json`)
-        return
-      }
-    })
+      // Ssve the file to the users computer
+      saveAs(bookmarksBlob, `${filename}.json`)
+      return
+    }
   }
 
   return (

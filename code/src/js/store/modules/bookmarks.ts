@@ -18,6 +18,10 @@ export const actions = {
     type: 'REMOVE_BOOKMARK',
     payload: guid,
   }),
+  setBookmarks: (bookmarks: BookmarkState) => ({
+    type: 'SET_BOOKMARKS',
+    payload: bookmarks,
+  }),
 }
 
 export function reducer(
@@ -32,6 +36,8 @@ export function reducer(
       }
     case 'REMOVE_BOOKMARK':
       return omit([action.payload], state)
+    case 'SET_BOOKMARKS':
+      return action.payload
     default:
       return state
   }
