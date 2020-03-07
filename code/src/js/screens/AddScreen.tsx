@@ -8,7 +8,6 @@ import {
   MenuItem,
   Chip,
 } from '@material-ui/core'
-import { MdArrowBack, MdAdd } from 'react-icons/md'
 import styled from 'styled-components'
 import { navigate } from '~/store/modules/navigation'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,10 +22,12 @@ import {
 import { Tag } from '~/types/Tag'
 import remove from 'lodash/fp/remove'
 import uniq from 'lodash/fp/uniq'
+import BackArrow from '~/icons/backArrow'
+import AddIcon from '~/icons/add'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
-    <MdArrowBack color="#fff" />
+    <BackArrow />
   </IconButton>
 )
 
@@ -146,7 +147,7 @@ export const AddScreen = () => {
           }}
         />
         <IconButton onClick={submitTag}>
-          <MdAdd />
+          <AddIcon />
         </IconButton>
       </CategoriesContainer>
       {renderChips()}

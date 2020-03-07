@@ -1,12 +1,14 @@
 import React from 'react'
 import { IconButton } from '@material-ui/core'
 import { Bookmark } from '~/types/Bookmark'
-import { MdEdit, MdDelete } from 'react-icons/md'
 import styled from 'styled-components'
 import { actions as editingActions } from '~/store/modules/editing'
 import { actions as bookmarkActions } from '~/store/modules/bookmarks'
 import { navigate } from '~/store/modules/navigation'
 import { useDispatch } from 'react-redux'
+
+import EditIcon from '~/icons/edit'
+import DeleteIcon from '~/icons/delete'
 
 export const BookmarkCard = (bookmark: Bookmark) => {
   const dispatch = useDispatch()
@@ -26,10 +28,10 @@ export const BookmarkCard = (bookmark: Bookmark) => {
       </FlexCol>
       <FlexRow>
         <IconButton onClick={onEdit}>
-          <MdEdit />
+          <EditIcon />
         </IconButton>
         <IconButton onClick={onRemove}>
-          <MdDelete />
+          <DeleteIcon />
         </IconButton>
       </FlexRow>
     </Card>

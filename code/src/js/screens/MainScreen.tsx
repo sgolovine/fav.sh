@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Header from '~/components/common/Header'
 import { IconButton, InputBase, Button } from '@material-ui/core'
-import { MdMenu } from 'react-icons/md'
-import { IoMdSettings } from 'react-icons/io'
 import styled from 'styled-components'
 import { navigate } from '~/store/modules/navigation'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,10 +14,12 @@ import escapeRegExp from 'lodash/fp/escapeRegExp'
 import { openSettingsWindow } from '~/browser/openSettings'
 import { isBlank } from '~/helpers'
 import Sidebar from 'react-sidebar'
+import MenuIcon from '~/icons/menu'
+import SettingsIcon from '~/icons/settings'
 
 const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
   <IconButton onClick={onClick}>
-    <MdMenu color="#fff" />
+    <MenuIcon />
   </IconButton>
 )
 
@@ -32,7 +32,7 @@ const HeaderRightButton = ({
 }) => (
   <>
     <IconButton onClick={onClick}>
-      <IoMdSettings color="#fff" />
+      <SettingsIcon />
     </IconButton>
     <Button
       variant="outlined"
