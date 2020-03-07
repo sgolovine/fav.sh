@@ -14,7 +14,7 @@ import { navigate } from '~/store/modules/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions, getTags } from '~/store/modules/bookmarks'
 import { Bookmark } from '~/types/Bookmark'
-import uuid from 'uuid/v1'
+import { generateBookmarkGuid } from '~/helpers'
 import { getActiveTab, Tab } from '~/browser/getTabInfo'
 import {
   getEditingBookmark,
@@ -33,7 +33,7 @@ const HeaderLeftButton = ({ onClick }: { onClick: () => void }) => (
 export const AddScreen = () => {
   const existingTags = useSelector(getTags)
   const editingBookmark = useSelector(getEditingBookmark)
-  const freshGuid = uuid()
+  const freshGuid = generateBookmarkGuid()
 
   const [guid] = useState<string>(editingBookmark?.guid || freshGuid)
   const [name, setName] = useState<string>(editingBookmark?.name || '')

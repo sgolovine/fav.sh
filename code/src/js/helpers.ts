@@ -1,10 +1,16 @@
 import { Bookmark, ExportedBookmark } from './types/Bookmark'
 import pickBy from 'lodash/fp/pickBy'
 import identity from 'lodash/fp/identity'
+import uuid from 'uuid/v1'
 // Various helper methods for things around the codebase
 
 export function isBlank(str: string) {
   return !str || /^\s*$/.test(str)
+}
+
+export function generateBookmarkGuid() {
+  const bookmarkGuid = uuid()
+  return bookmarkGuid
 }
 
 // Validate an imported bookmark
@@ -37,4 +43,21 @@ export function transformExportBookmark(bookmark: Bookmark): ExportedBookmark {
   // Remove any empty keys
   const finalBookmark = pickBy(identity, draftBookmark) as ExportedBookmark
   return finalBookmark
+}
+
+// This performs the inverse of an export transform, when a bookmark is imported
+// we want to convert it from an exported bookmark to a regular bookmark
+// read by the app
+export function transformImportBookmark(
+  bookmark: ExportedBookmark,
+  guid: string
+): Bookmark {
+  const draftBookmark: Bookmark = {
+    guid,
+    name: bookmark.name,
+    href: bookmark.href,
+    desc: bookmark.desc || '',
+    tags: bookmark.tags || [],
+  }
+  return draftBookmark
 }

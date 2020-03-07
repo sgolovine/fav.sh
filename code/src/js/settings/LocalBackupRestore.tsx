@@ -13,8 +13,13 @@ import { getBookmarksFromStorage } from '~/browser/getBookmarksFromStorage'
 import { BookmarkState } from '~/store/modules/bookmarks'
 import { saveAs } from 'file-saver'
 import { FileUploader } from '~/components/FileUploader'
-import { transformExportBookmark } from '~/helpers'
-import { Bookmark } from '~/types/Bookmark'
+import {
+  transformExportBookmark,
+  transformImportBookmark,
+  validateBookmark,
+  generateBookmarkGuid,
+} from '~/helpers'
+import { Bookmark, ExportedBookmark } from '~/types/Bookmark'
 
 export const LocalRestore = () => {
   const handleFile = (content: any) => {
@@ -30,6 +35,34 @@ export const LocalRestore = () => {
      *  because we will be re-using the component
      *  when we will work on gist restoration
      */
+    const error = () => alert('Could not import bookmarks')
+
+    let exportedBookmarks: BookmarkState = {}
+    try {
+      // Convert the JSON file to a JS object
+      const parsedBookmarks = JSON.parse(content)
+
+      // Validate every bookmark inside
+      parsedBookmarks.forEach((bookmark: ExportedBookmark) => {
+        if (!validateBookmark(bookmark)) {
+          error()
+          return
+        } else {
+          const bookmarkGuid = generateBookmarkGuid()
+          exportedBookmarks = {
+            ...exportedBookmarks,
+            [bookmarkGuid]: transformImportBookmark(bookmark, bookmarkGuid),
+          }
+        }
+      })
+    } catch {
+      // Catch case if the JSON file is invalid
+      error()
+      return
+    } finally {
+      console.log('Import Complete!!!', exportedBookmarks)
+      return
+    }
   }
 
   return (
@@ -40,7 +73,7 @@ export const LocalRestore = () => {
           Restore your bookmarks from a JSON file on your computer
         </Typography>
         <PaddedAction>
-          <FileUploader onFile={(content: any) => console.log(content)} />
+          <FileUploader onFile={handleFile} />
         </PaddedAction>
       </SectionContent>
     </SectionContainer>
