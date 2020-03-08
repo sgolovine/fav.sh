@@ -1,3 +1,4 @@
 dist
 .cache
 web-ext-artifacts/
+.env
