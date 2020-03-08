@@ -9,6 +9,7 @@ import {
   DownloadInputContainer,
 } from './common'
 import { Typography } from '@material-ui/core'
+import { authorize } from '~/browser/githubAuth'
 
 const GistPreAuth = ({ onLogin }: { onLogin: () => void }) => {
   return <SettingsButton onClick={onLogin} text="Log in With Github" />
@@ -21,6 +22,8 @@ const GistPostAuth = ({ onLogout }: { onLogout: () => void }) => {
 export const GistBackupRestore = () => {
   const [authenticated, setAuthenticated] = useState(false)
 
+  const handleAuth = () => authorize()
+
   return (
     <SectionContainer>
       <SectionHeader>Backup to Gist</SectionHeader>
@@ -32,7 +35,7 @@ export const GistBackupRestore = () => {
           {authenticated ? (
             <GistPostAuth onLogout={() => setAuthenticated(false)} />
           ) : (
-            <GistPreAuth onLogin={() => setAuthenticated(true)} />
+            <GistPreAuth onLogin={handleAuth} />
           )}
         </PaddedAction>
       </SectionContent>

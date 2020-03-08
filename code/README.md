@@ -12,7 +12,10 @@ Long story short I have learned quite a bit about how Javascript and Bundling wo
 ## Installation
 
 * Ensure that you have NodeJS and Yarn
-* `yarn`
+
+* `yarn` to install dependencies
+
+* If you want working Github Gist intergraiton you will need to supply both a `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in an .env file. To get either you must create an Oauth application in Github. More info on this coming soon.
 
 
 ## How to run

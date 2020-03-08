@@ -2,7 +2,10 @@ import React from 'react'
 import { AppBar, Toolbar, Typography } from '@material-ui/core'
 import styled from 'styled-components'
 import { LocalBackup, LocalRestore } from './LocalBackupRestore'
-// import { GistBackupRestore, AnonymousGistRestore } from './GistBackupRestore'
+import {
+  GistBackupRestore,
+  /** AnonymousGistRestore  */
+} from './GistBackupRestore'
 
 export const Settings = () => {
   return (
@@ -15,7 +18,7 @@ export const Settings = () => {
       <SettingsContainer>
         <LocalBackup />
         <LocalRestore />
-        {/* <GistBackupRestore /> */}
+        <GistBackupRestore />
         {/* <AnonymousGistRestore /> */}
       </SettingsContainer>
     </>
