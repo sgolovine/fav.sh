@@ -7,6 +7,7 @@ import { Router } from '~/screens/Router'
 import { Settings } from './settings/Settings'
 
 export const Bootstrap = () => {
+  console.log(process.env)
   const { store, persistor } = configureStore()
   return (
     <Provider store={store}>

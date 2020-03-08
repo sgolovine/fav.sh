@@ -17,9 +17,15 @@
     "default_title": "Fav",
     "default_popup": "entry/extension.html"
   },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "extension@fav.sh"
+    }
+  },  
   "permissions": [
     "tabs",
     "activeTab",
-    "storage"
+    "storage",
+    "identity"
   ]
 }
