@@ -23,6 +23,7 @@
     "@types/react-redux": "^7.1.7",
     "@types/styled-components": "^5.0.1",
     "@types/uuid": "^7.0.0",
+    "dotenv": "^8.2.0",
     "extension": "^0.2.0",
     "lodash": "^4.17.15",
     "react": "^0.14.0 || ^15.0.0 || ^16.0.0",
